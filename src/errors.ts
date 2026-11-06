@@ -131,6 +131,6 @@ export const ERRORS = {
 
 export type ErrorKey = keyof typeof ERRORS;
 
-export const PROBLEM_TYPE_BASE = 'https://talenttrust-backend.vercel.app/errors';
+export const PROBLEM_TYPE_BASE = 'https://covenant-backend.vercel.app/errors';
 
 export const isErrorKey = (code: string): code is ErrorKey => Object.prototype.hasOwnProperty.call(ERRORS, code);

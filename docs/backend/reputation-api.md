@@ -1,6 +1,6 @@
 # Reputation Profile API
 
-This document details the Reputation Profile API within the TalentTrust Backend.
+This document details the Reputation Profile API within the Covenant Backend.
 
 ## Overview
 

@@ -79,7 +79,7 @@ export function startServer({
   let activeRequests = 0;
   const server = app.listen(port, () => {
     const addr = server.address() as AddressInfo;
-    log(`TalentTrust API listening on http://localhost:${addr.port}`);
+    log(`Covenant API listening on http://localhost:${addr.port}`);
   });
 
   server.keepAliveTimeout = resolved.keepAliveTimeoutMs;

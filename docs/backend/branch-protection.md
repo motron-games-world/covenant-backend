@@ -1,4 +1,4 @@
-# Branch Protection — TalentTrust Backend
+# Branch Protection — Covenant Backend
 
 ## Overview
 

@@ -1,6 +1,6 @@
 # Environment Variables & Secrets Reference
 
-Complete reference for every environment variable and secret used across all TalentTrust Backend modules. Variables are grouped by the module or concern they configure.
+Complete reference for every environment variable and secret used across all Covenant Backend modules. Variables are grouped by the module or concern they configure.
 
 ---
 
@@ -90,10 +90,10 @@ Defined in: `src/config/secrets.ts`, `src/db/database.ts`, `src/audit/repository
 
 | Variable                | Required | Default                                   | Description                                                                                                                        |
 | ----------------------- | -------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`          | No       | `postgresql://localhost:5432/talenttrust` | PostgreSQL connection string. Required in staging and production.                                                                  |
-| `DB_PATH`               | No       | `talenttrust.db` (cwd)                    | File path for the SQLite database used by the event store (`src/db/database.ts`). Overrides the default path.                      |
+| `DATABASE_URL`          | No       | `postgresql://localhost:5432/covenant` | PostgreSQL connection string. Required in staging and production.                                                                  |
+| `DB_PATH`               | No       | `covenant.db` (cwd)                    | File path for the SQLite database used by the event store (`src/db/database.ts`). Overrides the default path.                      |
 | `AUDIT_STORAGE_BACKEND` | No       | `memory`                                  | Storage backend for the audit log. Accepted values: `memory`, `sqlite`. Use `sqlite` for persistence.                              |
-| `AUDIT_DB_PATH`         | No       | `talenttrust-audit.db` (cwd)              | File path for the SQLite audit log database. In `test` mode defaults to `:memory:`. Only used when `AUDIT_STORAGE_BACKEND=sqlite`. |
+| `AUDIT_DB_PATH`         | No       | `covenant-audit.db` (cwd)              | File path for the SQLite audit log database. In `test` mode defaults to `:memory:`. Only used when `AUDIT_STORAGE_BACKEND=sqlite`. |
 | `WEBHOOK_DLQ_PATH`      | No       | `data/webhook-dlq.db` (cwd)               | File path for the webhook dead-letter queue SQLite database (`src/queue/webhook-dlq.ts`).                                          |
 
 ---
@@ -227,7 +227,7 @@ Defined in: `src/logger.ts`, `src/middleware/metricsAuth.ts`, `src/middleware/ht
 | `HOSTNAME`           | No       | `unknown`                            | Hostname included in every log record. Typically set automatically by the OS or container runtime.                                                             |
 | `METRICS_AUTH_TOKEN` | No       | _(none)_                             | Bearer token required to access the `/metrics` endpoint. If unset, the endpoint is open (acceptable in development, not in production). **Treat as a secret.** |
 | `TRUST_PROXY`        | No       | `false`                              | Set to `true` to trust the `X-Forwarded-For` header for client IP resolution. Enable only when running behind a trusted reverse proxy.                         |
-| `SERVICE_NAME`       | No       | `talenttrust-backend`                | Service name label attached to Prometheus metrics.                                                                                                             |
+| `SERVICE_NAME`       | No       | `covenant-backend`                | Service name label attached to Prometheus metrics.                                                                                                             |
 | `HTTP_METRICS_ROUTE_LABEL_LIMIT` | No | `100` | Caps distinct HTTP route template labels for `http_requests_total` and `http_request_duration_seconds`; new routes beyond the cap are recorded as `other`. |
 
 ---
@@ -317,7 +317,7 @@ The `SecretsManager` (`src/config/secrets.ts`) provides a central registry for s
 | -------------- | --------------- | ----------------------------------------- |
 | `PORT`         | `PORT`          | `3001`                                    |
 | `NODE_ENV`     | `NODE_ENV`      | `development`                             |
-| `DATABASE_URL` | `DATABASE_URL`  | `postgresql://localhost:5432/talenttrust` |
+| `DATABASE_URL` | `DATABASE_URL`  | `postgresql://localhost:5432/covenant` |
 | `JWT_SECRET`   | `JWT_SECRET`    | `dev-secret-keep-it-safe`                 |
 
 Additional secrets (Redis password, metrics token, compliance audit secret) are read directly from `process.env` in their respective modules and should be added to `SecretsManager` if centralised rotation is needed.
@@ -344,9 +344,9 @@ JWT_SECRET=<any-value-at-least-8-chars>
 NODE_ENV=staging
 PORT=3002
 DEBUG=false
-API_BASE_URL=https://staging-api.talenttrust.example.com
-CORS_ALLOWED_ORIGINS=https://staging.talenttrust.example.com
-DATABASE_URL=postgresql://user:pass@staging-db.example.com:5432/talenttrust
+API_BASE_URL=https://staging-api.covenant.example.com
+CORS_ALLOWED_ORIGINS=https://staging.covenant.example.com
+DATABASE_URL=postgresql://user:pass@staging-db.example.com:5432/covenant
 JWT_SECRET=<strong-random-secret>
 REDIS_HOST=<redis-host>
 REDIS_PASSWORD=<redis-password>
@@ -363,9 +363,9 @@ REQUIRED_ENV_VARS=JWT_SECRET,DATABASE_URL,REDIS_PASSWORD
 NODE_ENV=production
 PORT=3000
 DEBUG=false
-API_BASE_URL=https://api.talenttrust.example.com
-CORS_ALLOWED_ORIGINS=https://app.talenttrust.example.com
-DATABASE_URL=postgresql://user:pass@prod-db.example.com:5432/talenttrust
+API_BASE_URL=https://api.covenant.example.com
+CORS_ALLOWED_ORIGINS=https://app.covenant.example.com
+DATABASE_URL=postgresql://user:pass@prod-db.example.com:5432/covenant
 JWT_SECRET=<strong-random-secret>          # ⚠️ Required
 REDIS_HOST=<redis-host>
 REDIS_PASSWORD=<redis-password>            # ⚠️ Required

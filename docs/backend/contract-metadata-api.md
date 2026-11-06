@@ -1,6 +1,6 @@
 # Contract Metadata API
 
-The Contract Metadata API provides secure CRUD operations for managing metadata associated with escrow contracts in the TalentTrust platform. This API enables storage of key-value pairs with support for different data types and sensitive data handling.
+The Contract Metadata API provides secure CRUD operations for managing metadata associated with escrow contracts in the Covenant platform. This API enables storage of key-value pairs with support for different data types and sensitive data handling.
 
 ## Overview
 
@@ -14,7 +14,7 @@ Contract metadata allows you to store additional information about escrow contra
 ## Base URL
 
 ```
-https://api.talenttrust.com/api/v1
+https://api.covenant.com/api/v1
 ```
 
 ## Authentication
@@ -310,7 +310,7 @@ comparator and `fetchAndVerify()` for the full verification flow.
 ### Create Contract Metadata
 
 ```bash
-curl -X POST https://api.talenttrust.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata \
+curl -X POST https://api.covenant.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata \
   -H "Authorization: Bearer your-token" \
   -H "Content-Type: application/json" \
   -d '{
@@ -324,14 +324,14 @@ curl -X POST https://api.talenttrust.com/api/v1/contracts/550e8400-e29b-41d4-a71
 ### List with Filtering
 
 ```bash
-curl -X GET "https://api.talenttrust.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata?page=1&limit=10&data_type=string" \
+curl -X GET "https://api.covenant.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata?page=1&limit=10&data_type=string" \
   -H "Authorization: Bearer your-token"
 ```
 
 ### Update Metadata
 
 ```bash
-curl -X PATCH https://api.talenttrust.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata/550e8400-e29b-41d4-a716-446655440000 \
+curl -X PATCH https://api.covenant.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata/550e8400-e29b-41d4-a716-446655440000 \
   -H "Authorization: Bearer your-token" \
   -H "Content-Type: application/json" \
   -d '{
@@ -342,7 +342,7 @@ curl -X PATCH https://api.talenttrust.com/api/v1/contracts/550e8400-e29b-41d4-a7
 ### Delete Metadata
 
 ```bash
-curl -X DELETE https://api.talenttrust.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata/550e8400-e29b-41d4-a716-446655440000 \
+curl -X DELETE https://api.covenant.com/api/v1/contracts/550e8400-e29b-41d4-a716-446655440001/metadata/550e8400-e29b-41d4-a716-446655440000 \
   -H "Authorization: Bearer your-token"
 ```
 

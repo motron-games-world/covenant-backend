@@ -1,7 +1,7 @@
 # Reputation Request Lifecycle
 
 This document walks a reputation request end-to-end through every layer of the
-Talenttrust-Backend codebase: from the HTTP wire all the way to the SQLite row
+Covenant-Backend codebase: from the HTTP wire all the way to the SQLite row
 and the immutable audit log entry. It covers both operations exposed by the
 reputation router.
 

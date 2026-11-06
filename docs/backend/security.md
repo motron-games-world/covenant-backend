@@ -1,6 +1,6 @@
 # Security Documentation
 
-This document describes the security headers and origin controls implemented in the TalentTrust Backend.
+This document describes the security headers and origin controls implemented in the Covenant Backend.
 
 ## Overview
 
@@ -63,7 +63,7 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:4200,http://127.0.0.
 **Production**:
 ```bash
 NODE_ENV=production
-CORS_ALLOWED_ORIGINS=https://app.talenttrust.com,https://admin.talenttrust.com
+CORS_ALLOWED_ORIGINS=https://app.covenant.com,https://admin.covenant.com
 ```
 
 **Invalid (will fail in production)**:

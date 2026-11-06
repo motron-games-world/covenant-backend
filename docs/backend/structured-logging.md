@@ -1,6 +1,6 @@
 # Structured Logging with Pino
 
-This document describes the TalentTrust Backend's structured logging implementation using Pino, including the JSON field schema, redaction rules, and correlation ID propagation.
+This document describes the Covenant Backend's structured logging implementation using Pino, including the JSON field schema, redaction rules, and correlation ID propagation.
 
 ## Overview
 
@@ -25,7 +25,7 @@ Every log record contains the following base fields:
 | `level` | string | Log level (trace, debug, info, warn, error, fatal) |
 | `time` | number | Unix timestamp in milliseconds (Pino default) |
 | `message` | string | Human-readable log message |
-| `service` | string | Constant value: `"talenttrust-backend"` |
+| `service` | string | Constant value: `"covenant-backend"` |
 | `pid` | number | Process ID |
 | `hostname` | string | Hostname (from `HOSTNAME` env var or `"unknown"`) |
 | `requestId` | string (optional) | Per-request UUID for tracing |
@@ -41,7 +41,7 @@ Any additional fields passed to the logger are merged into the log record. For e
   "level": "info",
   "time": 1714377600000,
   "message": "User logged in",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "pid": 12345,
   "hostname": "web-01",
   "userId": "user-123",

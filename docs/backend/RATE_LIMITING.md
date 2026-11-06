@@ -7,7 +7,7 @@
 
 ## Overview
 
-This document describes the rate-limiting and abuse-guard system implemented for TalentTrust's public API. The implementation uses a **sliding-window counter** algorithm with an **adaptive abuse guard** that applies exponential back-off blocks to repeat offenders.
+This document describes the rate-limiting and abuse-guard system implemented for Covenant's public API. The implementation uses a **sliding-window counter** algorithm with an **adaptive abuse guard** that applies exponential back-off blocks to repeat offenders.
 
 ---
 

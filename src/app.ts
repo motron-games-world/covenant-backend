@@ -693,12 +693,12 @@ export function createApp(
     }
   };
 
-  app.get('/.well-known/talenttrust-receipts.json', wrap(() => receiptManager().getPublishedKeys()));
+  app.get('/.well-known/covenant-receipts.json', wrap(() => receiptManager().getPublishedKeys()));
 
   app.get(
     '/',
     wrap(() => ({
-      name: 'TalentTrust API',
+      name: 'Covenant API',
       version: config.version,
       description: 'Milestone-based freelancer escrow API backed by a Soroban contract on Stellar.',
       docs: '/docs',
@@ -714,7 +714,7 @@ export function createApp(
         'GET  /api/v1/errors',
         'GET  /errors/:code',
         'GET  /metrics',
-        'GET  /.well-known/talenttrust-receipts.json',
+        'GET  /.well-known/covenant-receipts.json',
         'GET  /api/v1/chain',
         'GET  /api/v1/chain/contracts/:chainId',
         'GET  /api/v1/chain/reputation/:address',
@@ -1004,7 +1004,7 @@ export function createApp(
       res.setHeader('Content-Type', 'text/csv; charset=utf-8');
       res.setHeader(
         'Content-Disposition',
-        `attachment; filename="talenttrust-${safeAddress}-${from.toISOString().slice(0, 10)}-${to.toISOString().slice(0, 10)}.csv"`,
+        `attachment; filename="covenant-${safeAddress}-${from.toISOString().slice(0, 10)}-${to.toISOString().slice(0, 10)}.csv"`,
       );
       if (bom) res.write('\uFEFF'); // UTF-8 BOM for Excel when ?bom=true
       res.write(csvRow([...CSV_HEADERS]));

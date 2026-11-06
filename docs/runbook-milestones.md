@@ -1,6 +1,6 @@
 # Milestones Subsystem Operations Runbook
 
-This document is the operator- and on-call-facing runbook for the TalentTrust
+This document is the operator- and on-call-facing runbook for the Covenant
 **milestones** subsystem. Milestones are not a standalone resource — they are a
 first-class field on the Contract API surface. This runbook covers configuration,
 common failure modes, alert symptom triage, and recovery procedures.

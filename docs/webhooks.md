@@ -1,6 +1,6 @@
 # Webhooks API Documentation
 
-This document describes every webhook-related endpoint provided by the TalentTrust Backend API. It covers webhook subscription management, metrics recording, and DLQ replay operations.
+This document describes every webhook-related endpoint provided by the Covenant Backend API. It covers webhook subscription management, metrics recording, and DLQ replay operations.
 
 ## Overview
 
@@ -10,7 +10,7 @@ The webhooks system consists of three primary API groups:
 2. **Metrics Recording** (`/api/v1/metrics/webhook/*`) — Record webhook delivery outcomes and DLQ metrics
 3. **Admin Operations** (`/api/v1/admin/webhooks/*`) — Replay dead-letter queue entries
 
-All endpoints follow the standard TalentTrust API response envelope contract (see [API.md](API.md)). All timestamps are ISO 8601 formatted strings.
+All endpoints follow the standard Covenant API response envelope contract (see [API.md](API.md)). All timestamps are ISO 8601 formatted strings.
 
 ---
 
@@ -829,7 +829,7 @@ try {
 
 ### No-Secret Subscriptions
 
-If a subscription is created **without** a `secret`, outbound webhooks are **not signed**. The `X-Signature` and `X-Timestamp` headers will not be present. You can still verify the webhook came from TalentTrust by:
+If a subscription is created **without** a `secret`, outbound webhooks are **not signed**. The `X-Signature` and `X-Timestamp` headers will not be present. You can still verify the webhook came from Covenant by:
 
 - Checking the source IP address (if your network allows it)
 - Using a firewall rule or API gateway to restrict access

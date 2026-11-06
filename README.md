@@ -1,14 +1,11 @@
-# TalentTrust Backend
+# Covenant Backend
 
 ## Live
 
-- Website: https://talenttrust-frontend.vercel.app
-- Docs: https://talenttrust-frontend.vercel.app/docs
-- API: https://talenttrust-backend.vercel.app
-- API docs (Swagger UI): https://talenttrust-backend.vercel.app/docs
+- Website/API/Docs: pending under new branding
 - Contract (Stellar testnet): [`CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W`](https://stellar.expert/explorer/testnet/contract/CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W)
 
-Express + TypeScript API for TalentTrust, a milestone-based freelancer escrow protocol on Stellar.
+Express + TypeScript API for Covenant, a milestone-based freelancer escrow protocol on Stellar.
 The API mirrors the state machine of the Soroban escrow contract
 ([Talenttrust-Contracts](https://github.com/Talenttrust/Talenttrust-Contracts)) so clients and
 freelancers can create engagements, fund escrow, release milestones, raise disputes and build reputation.
@@ -63,7 +60,7 @@ When the escrow contract is paused on-chain (`is_paused`, cached for `PAUSE_CHEC
 | GET | `/api/v1/reputation` | Ranked freelancer leaderboard (`?sort=score\|completed\|average&minCompleted=&limit=&cursor=`) |
 | GET | `/api/v1/reputation/:address` | Reputation (freelancer fields + `asClient`) |
 | GET | `/api/v1/reputation/:address/reviews` | Reviews received (`?role=`, `?limit=`, `?cursor=`) |
-| GET | `/.well-known/talenttrust-receipts.json` | Published ed25519 public keys for offline verification |
+| GET | `/.well-known/covenant-receipts.json` | Published ed25519 public keys for offline verification |
 | GET | `/api/v1/contracts/:id/receipt` | Get detached signed JWS receipt for contract state |
 | POST | `/api/v1/receipts/verify` | Verify JWS receipt and check against current state |
 | GET/POST | `/api/cron/expire-contracts` | Authenticated daily sweep of due unfunded contracts |

@@ -1,6 +1,6 @@
 # Soroban RPC Integration Service
 
-The `SorobanRpcService` provides a clean interface for the TalentTrust backend to interact with the Soroban network (Stellar). It abstracts away the raw setup of the `@stellar/stellar-sdk` RPC server and exposes the primary functions needed for our smart contract interactions.
+The `SorobanRpcService` provides a clean interface for the Covenant backend to interact with the Soroban network (Stellar). It abstracts away the raw setup of the `@stellar/stellar-sdk` RPC server and exposes the primary functions needed for our smart contract interactions.
 
 ## Configuration
 

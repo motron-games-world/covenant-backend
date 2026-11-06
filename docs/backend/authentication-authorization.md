@@ -2,7 +2,7 @@
 
 ## Overview
 
-TalentTrust Backend uses **Role-Based Access Control (RBAC)** to protect API
+Covenant Backend uses **Role-Based Access Control (RBAC)** to protect API
 endpoints. Every protected request must include a valid bearer token that
 encodes a user identity and role. The system then checks the role against an
 **Access Control Matrix** before granting access.

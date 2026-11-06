@@ -1,6 +1,6 @@
 # Escrow Contract Lifecycle and Bounds Enforcement
 
-This document outlines the architecture, state transitions, security bounds, and blockchain orchestration involved in the TalentTrust decentralized freelancer escrow protocol. Contracts flow through the Controller (`src/controllers/contracts.controller.ts`), Service (`src/services/contracts.service.ts`), and Repository layers.
+This document outlines the architecture, state transitions, security bounds, and blockchain orchestration involved in the Covenant decentralized freelancer escrow protocol. Contracts flow through the Controller (`src/controllers/contracts.controller.ts`), Service (`src/services/contracts.service.ts`), and Repository layers.
 
 ## 1. Repository Layer (Unified)
 
@@ -47,7 +47,7 @@ GET /api/v1/contracts/bounds
 *Note: These limits are hard-coded policy decisions within `src/contracts/bounds.ts` and require a code review to change. There is no runtime toggle to avoid misconfiguration risks.*
 
 ## 3. Contract Lifecycle & States
-Contracts in TalentTrust act as the off-chain representation of an upcoming or active on-chain escrow.
+Contracts in Covenant act as the off-chain representation of an upcoming or active on-chain escrow.
 
 ### Status Flow
 1. **Draft (`draft`)**: The default state when a contract is created. At this stage, boundaries and schema validation have passed, and the record exists in the database.

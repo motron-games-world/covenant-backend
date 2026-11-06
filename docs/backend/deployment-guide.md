@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide describes the reproducible deployment workflow with environment promotion for the TalentTrust Backend. The system provides automated, secure, and tested deployments across development, staging, and production environments.
+This guide describes the reproducible deployment workflow with environment promotion for the Covenant Backend. The system provides automated, secure, and tested deployments across development, staging, and production environments.
 
 ## Architecture
 
@@ -268,7 +268,7 @@ implements a production-grade readiness probe with the following guarantees:
 
 ```ts
 interface HealthCheckResult {
-  service: string;                   // always "talenttrust-backend"
+  service: string;                   // always "covenant-backend"
   status: 'healthy' | 'unhealthy';   // healthy only on HTTP 200
   timestamp: Date;
   details?: {

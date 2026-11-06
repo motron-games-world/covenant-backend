@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document provides a comprehensive catalog of all Prometheus metrics exported by the Talenttrust-Backend service. It is designed for operators, SREs, and platform engineers who need to build dashboards, configure alerts, and monitor the system's health and performance.
+This document provides a comprehensive catalog of all Prometheus metrics exported by the Covenant-Backend service. It is designed for operators, SREs, and platform engineers who need to build dashboards, configure alerts, and monitor the system's health and performance.
 
 **Audience:**
 - Operations teams setting up Prometheus scraping
@@ -76,10 +76,10 @@ The `metricsAuthMiddleware` uses `crypto.timingSafeEqual` to prevent timing side
 
 ```yaml
 scrape_configs:
-  - job_name: talenttrust-backend
+  - job_name: covenant-backend
     metrics_path: /metrics
     static_configs:
-      - targets: ['talenttrust-backend:3001']
+      - targets: ['covenant-backend:3001']
     authorization:
       type: Bearer
       credentials: ${METRICS_AUTH_TOKEN}
@@ -114,7 +114,7 @@ The `GET /metrics` endpoint returns:
 
 ## Cardinality Controls
 
-Prometheus metrics with unbounded label values can cause memory growth and performance degradation. The Talenttrust-Backend implements several cardinality controls to prevent label explosion.
+Prometheus metrics with unbounded label values can cause memory growth and performance degradation. The Covenant-Backend implements several cardinality controls to prevent label explosion.
 
 ### HTTP_METRICS_ROUTE_LABEL_LIMIT
 
@@ -221,7 +221,7 @@ the request path and body are intentionally absent.
 | `webhook_delivery_latency_seconds` | Histogram | `status`, `provider` | seconds | Webhook delivery latency in seconds. | `src/webhookMetrics.ts` | `0.1, 0.5, 1, 2, 5, 10, +Inf` |
 | `webhook_delivery_retries_total` | Counter | `provider`, `reason` | total (dimensionless count) | Total number of webhook delivery retries due to transient failures. | `src/webhookMetrics.ts` | N/A |
 | `webhook_breaker_state` | Gauge | `provider` | dimensionless (encoded: `0=CLOSED`, `1=OPEN`, `2=HALF_OPEN`) | Current circuit-breaker state per provider. See encoding details below. | `src/webhookMetrics.ts` | N/A |
-| `talenttrust_backend_*` | Various | Various | Various | Node.js process and runtime default metrics collected by `prom-client`. Prefix derived from `SERVICE_NAME` environment variable (default: `talenttrust-backend`). | `prom-client` library (via `collectDefaultMetrics()`) | N/A |
+| `covenant_backend_*` | Various | Various | Various | Node.js process and runtime default metrics collected by `prom-client`. Prefix derived from `SERVICE_NAME` environment variable (default: `covenant-backend`). | `prom-client` library (via `collectDefaultMetrics()`) | N/A |
 
 ---
 
@@ -345,7 +345,7 @@ This table clarifies which module increments or sets each DLQ-related series:
 
 **Usage in Alerts:**
 ```promql
-service_health_status{service="talenttrust-backend"} < 2
+service_health_status{service="covenant-backend"} < 2
 ```
 This expression fires when the service is either `degraded` or `down`.
 
@@ -526,7 +526,7 @@ event_loop_lag_ms >= 250
 **Alert-Ready Expression:**
 ```promql
 # Alert when heap usage is degraded or worse
-(talenttrust_backend_nodejs_heap_size_used_bytes / talenttrust_backend_nodejs_heap_size_total_bytes) >= 0.85
+(covenant_backend_nodejs_heap_size_used_bytes / covenant_backend_nodejs_heap_size_total_bytes) >= 0.85
 ```
 
 ---
@@ -559,13 +559,13 @@ groups:
   - name: service_health
     rules:
       - alert: ServiceHealthDegraded
-        expr: service_health_status{service="talenttrust-backend"} < 2
+        expr: service_health_status{service="covenant-backend"} < 2
         for: 1m
         labels:
           severity: warning
         annotations:
           summary: "Service health degraded or down"
-          description: "Talenttrust-Backend service health status is {{ $value }} (0=down, 1=degraded, 2=up). Check event loop lag, heap usage, and dependency health."
+          description: "Covenant-Backend service health status is {{ $value }} (0=down, 1=degraded, 2=up). Check event loop lag, heap usage, and dependency health."
 ```
 
 **Explanation:**
@@ -589,7 +589,7 @@ All metrics documented in this catalog are validated by a comprehensive automate
 The test suite includes automated checks that ensure this documentation stays synchronized with the actual registered metrics:
 
 1. Every metric listed in this catalog is verified to be registered by the application
-2. No undocumented metrics are allowed (excluding default `talenttrust_backend_*` metrics)
+2. No undocumented metrics are allowed (excluding default `covenant_backend_*` metrics)
 3. All documented label names are verified to be observable in the metrics output
 
 **CI Coverage Reports:**
@@ -600,7 +600,7 @@ Coverage reports are uploaded as artifacts in every CI run and can be accessed v
 
 ## Summary
 
-This catalog documents the complete set of Prometheus metrics exported by Talenttrust-Backend, including:
+This catalog documents the complete set of Prometheus metrics exported by Covenant-Backend, including:
 
 - ✅ 13+ application-specific metrics
 - ✅ Default Node.js runtime metrics

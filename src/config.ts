@@ -45,7 +45,8 @@ export const config = {
     process.env.ESCROW_CONTRACT_ID || 'CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W',
   rpcUrl: process.env.STELLAR_RPC_URL || 'https://soroban-testnet.stellar.org',
   txTimeoutSeconds: Math.max(1, Number.parseInt(process.env.TX_TIMEOUT_SECONDS || '300', 10) || 300),
-  frontendUrl: process.env.FRONTEND_URL || 'https://talenttrust-frontend.vercel.app',
+  // No default while the Covenant frontend's new deployment is pending; set FRONTEND_URL explicitly.
+  frontendUrl: process.env.FRONTEND_URL || '',
   disputeSlaHours: Number.isFinite(slaRaw) && slaRaw > 0 ? slaRaw : 72,
   version: '1.0.0',
   /** Per-call Soroban RPC timeout. */

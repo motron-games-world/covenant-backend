@@ -215,4 +215,4 @@ docs/backend/
 - [Full Deployment Guide](./deployment-guide.md)
 - [Security Documentation](./security.md)
 - [Environment Examples](./environment-examples.md)
-- [GitHub Actions](https://github.com/Talenttrust/Talenttrust-Backend/actions)
+- [GitHub Actions](https://github.com/motron-games-world/covenant-backend/actions)

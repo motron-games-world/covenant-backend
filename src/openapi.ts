@@ -137,10 +137,10 @@ const milestonesSchema = {
 const spec = {
   openapi: '3.0.3',
   info: {
-    title: 'TalentTrust API',
+    title: 'Covenant API',
     version: config.version,
     description:
-      'Milestone-based escrow API for freelancers and clients. State mirrors the TalentTrust ' +
+      'Milestone-based escrow API for freelancers and clients. State mirrors the Covenant ' +
       `Soroban escrow contract on Stellar ${config.network} (${config.contractId}). ` +
       `Explorer: ${explorerUrl()}. Data is held in memory and resets on redeploy.\n\n` +
       '**Response compression**: The API compresses JSON responses ≥ 1 KB with gzip or Brotli ' +
@@ -637,7 +637,7 @@ const spec = {
         },
       },
     },
-    '/.well-known/talenttrust-receipts.json': {
+    '/.well-known/covenant-receipts.json': {
       get: {
         tags: ['Receipts'],
         summary: 'Published ed25519 public keys for offline JWS receipt verification',
@@ -805,7 +805,7 @@ const spec = {
             headers: {
               'Content-Disposition': {
                 schema: { type: 'string' },
-                description: 'attachment; filename="talenttrust-<address>-<from>-<to>.csv"',
+                description: 'attachment; filename="covenant-<address>-<from>-<to>.csv"',
               },
             },
             content: { 'text/csv': { schema: { type: 'string' } } },
@@ -1818,7 +1818,7 @@ const spec = {
         description: 'RFC 9457 problem details. `error`/`message` duplicate the code/detail for older clients.',
         required: ['type', 'title', 'status', 'error', 'message'],
         properties: {
-          type: { type: 'string', format: 'uri', description: 'https://talenttrust-backend.vercel.app/errors/<code>' },
+          type: { type: 'string', format: 'uri', description: 'https://covenant-backend.vercel.app/errors/<code>' },
           title: { type: 'string' },
           status: { type: 'integer' },
           detail: { type: 'string' },
@@ -2668,12 +2668,12 @@ export const docsHtml = `<!doctype html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TalentTrust API Docs</title>
+  <title>Covenant API Docs</title>
   <link rel="stylesheet" href="${SWAGGER_CSS}" integrity="${SWAGGER_CSS_SRI}" crossorigin="anonymous" />
   <style>${docsInlineStyle}</style>
 </head>
 <body>
-  <div class="tt-bar"><strong>TalentTrust API</strong>
+  <div class="tt-bar"><strong>Covenant API</strong>
     <a href="/">Endpoints (JSON)</a>
     <a href="/openapi.json">openapi.json</a>
     <a href="${config.frontendUrl}">Website</a>

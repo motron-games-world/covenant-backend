@@ -2,7 +2,7 @@
 
 ## Overview
 
-This runbook covers the Prometheus metrics subsystem for the Talenttrust-Backend
+This runbook covers the Prometheus metrics subsystem for the Covenant-Backend
 service. It is intended for operators, SREs, and on-call engineers who need to
 diagnose, restore, or configure metrics collection.
 
@@ -51,7 +51,7 @@ Related documentation:
 | Variable | Default | Required | Description |
 |----------|---------|----------|-------------|
 | `PORT` | `3001` | No | Server port (affects metrics scrape URL) |
-| `SERVICE_NAME` | `talenttrust-backend` | No | Used as health-check label and `collectDefaultMetrics` prefix |
+| `SERVICE_NAME` | `covenant-backend` | No | Used as health-check label and `collectDefaultMetrics` prefix |
 | `METRICS_ENABLED` | `true` | No | Whether to enable metrics export |
 | `METRICS_AUTH_TOKEN` | (unset) | Production | Bearer token protecting the `/metrics` endpoint |
 | `HTTP_METRICS_ROUTE_LABEL_LIMIT` | `100` | No | Max distinct route labels before collapsing to `"other"` |
@@ -65,7 +65,7 @@ Related documentation:
 
 ```yaml
 scrape_configs:
-  - job_name: talenttrust-backend
+  - job_name: covenant-backend
     metrics_path: /metrics
     static_configs:
       - targets: ['localhost:3001']
@@ -116,7 +116,7 @@ Metrics can still be retrieved programmatically:
 ```ts
 import { MetricsService } from './observability/metrics-service';
 
-const service = new MetricsService('talenttrust-backend');
+const service = new MetricsService('covenant-backend');
 const metrics = await service.getMetrics();
 console.log(metrics);
 ```
@@ -352,7 +352,7 @@ grep -i 'metric\|register\|registry\|prometheus' /var/log/app.log
 
 ```bash
 # 6. Via Prometheus UI or API
-curl http://prometheus:9090/api/v1/targets | jq '.data.activeTargets[] | select(.job=="talenttrust-backend")'
+curl http://prometheus:9090/api/v1/targets | jq '.data.activeTargets[] | select(.job=="covenant-backend")'
 ```
 
 ### Step 5: Restore Metrics
@@ -384,7 +384,7 @@ If metrics are missing or corrupted:
 
 | Condition | Severity | Action |
 |-----------|----------|--------|
-| `up{job="talenttrust-backend"} == 0` | Critical | Service is down. Investigate process health. |
+| `up{job="covenant-backend"} == 0` | Critical | Service is down. Investigate process health. |
 | `service_health_status < 2` | Warning | Service degraded. Check event loop lag, heap usage, dependencies. |
 | `webhook_dlq_operations_total{operation="drop_overflow"} > 0` | Critical | DLQ full; events being dropped. Increase DLQ capacity. |
 

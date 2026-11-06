@@ -2,7 +2,7 @@
 
 GET /health
 
-Returns structured diagnostics for the TalentTrust backend and its dependencies.
+Returns structured diagnostics for the Covenant backend and its dependencies.
 
 ## Response
 
@@ -16,7 +16,7 @@ Returns structured diagnostics for the TalentTrust backend and its dependencies.
 ```json
 {
   "status": "ok",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "timestamp": "2024-01-01T00:00:00.000Z",
   "uptimeSeconds": 42,
   "probes": [
@@ -65,7 +65,7 @@ Add a **Health Endpoint** section to the existing `README.md` under the Scripts 
 | Field | Description |
 |-------|-------------|
 | `status` | `"ok"` (HTTP 200) or `"degraded"` (HTTP 503) |
-| `service` | Always `"talenttrust-backend"` |
+| `service` | Always `"covenant-backend"` |
 | `timestamp` | ISO-8601 time of the check |
 | `uptimeSeconds` | Process uptime in seconds |
 | `probes` | Array of dependency probe results |

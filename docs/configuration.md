@@ -1,6 +1,6 @@
 # Configuration
 
-This document describes environment-variable configuration for the TalentTrust
+This document describes environment-variable configuration for the Covenant
 backend. It currently focuses on the queue retry policy overrides.
 
 ## Retry policy overrides

@@ -1,6 +1,6 @@
 # Webhooks API Examples
 
-Ready-to-run cURL examples for all webhook endpoints in the TalentTrust Backend.
+Ready-to-run cURL examples for all webhook endpoints in the Covenant Backend.
 
 ## Authentication
 

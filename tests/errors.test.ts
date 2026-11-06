@@ -57,7 +57,7 @@ describe('Error catalog', () => {
     expect(res.body.message).toBeTruthy();
     expect(res.body.title).toBe('Contract not found');
     expect(res.body.status).toBe(404);
-    expect(res.body.type).toBe('https://talenttrust-backend.vercel.app/errors/contract_not_found');
+    expect(res.body.type).toBe('https://covenant-backend.vercel.app/errors/contract_not_found');
   });
 
   it('over_funded response includes contractError', async () => {

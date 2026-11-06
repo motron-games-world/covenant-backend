@@ -145,5 +145,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic CI workflow
 - Initial project structure
 
-[Unreleased]: https://github.com/Talenttrust/Talenttrust-Backend/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/Talenttrust/Talenttrust-Backend/releases/tag/v0.1.0
+[Unreleased]: https://github.com/motron-games-world/covenant-backend/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/motron-games-world/covenant-backend/releases/tag/v0.1.0

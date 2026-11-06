@@ -2,7 +2,7 @@
 
 ## Overview
 
-The TalentTrust backend implements a robust, durable queue-based background job system using BullMQ and Redis. This system offloads heavy asynchronous tasks from the main request-response cycle, improving API responsiveness and reliability.
+The Covenant backend implements a robust, durable queue-based background job system using BullMQ and Redis. This system offloads heavy asynchronous tasks from the main request-response cycle, improving API responsiveness and reliability.
 
 ## Architecture
 
@@ -36,7 +36,7 @@ Content-Type: application/json
   "type": "email-notification",
   "payload": {
     "to": "user@example.com",
-    "subject": "Welcome to TalentTrust",
+    "subject": "Welcome to Covenant",
     "body": "Thank you for joining!"
   },
   "options": {

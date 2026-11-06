@@ -2,7 +2,7 @@
 
 ## Overview
 
-Talenttrust Backend uses a **blue/green deployment strategy** to enable zero-downtime updates with automatic rollback on health check failure. This runbook covers the operator procedures for managing deployments.
+Covenant Backend uses a **blue/green deployment strategy** to enable zero-downtime updates with automatic rollback on health check failure. This runbook covers the operator procedures for managing deployments.
 
 ### Topology
 

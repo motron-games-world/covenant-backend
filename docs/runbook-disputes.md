@@ -1,12 +1,12 @@
 # Disputes Subsystem Operations Runbook
 
-This runbook provides operational guidance for the TalentTrust disputes subsystem — configuration reference, common failure modes, alerting signals, and step-by-step recovery procedures. It is intended for operators, SREs, and on-call engineers who need to diagnose and resolve disputes-related issues in production.
+This runbook provides operational guidance for the Covenant disputes subsystem — configuration reference, common failure modes, alerting signals, and step-by-step recovery procedures. It is intended for operators, SREs, and on-call engineers who need to diagnose and resolve disputes-related issues in production.
 
 ---
 
 **Metadata:**
 - **Last Updated:** 2026-07-25
-- **Owner:** TalentTrust Backend Team
+- **Owner:** Covenant Backend Team
 - **Related Issue:** #745
 - **Related Documentation:** [disputes.md](./disputes.md), [contracts-lifecycle.md](./contracts-lifecycle.md), [backend/authentication-authorization.md](./backend/authentication-authorization.md)
 
@@ -29,7 +29,7 @@ This runbook provides operational guidance for the TalentTrust disputes subsyste
 
 ## Overview
 
-The disputes subsystem in TalentTrust handles contract disputes through two complementary mechanisms:
+The disputes subsystem in Covenant handles contract disputes through two complementary mechanisms:
 
 1. **Contract status transitions** — contracts transition to `status: "disputed"` via `PATCH /api/v1/contracts/:id`, triggering multi-channel notifications and audit trail entries.
 2. **Smart-contract event ingestion** — on-chain dispute events (`dispute:initiated`, `dispute:resolved`) are indexed via `POST /api/v1/events` with idempotency guarantees.
@@ -127,7 +127,7 @@ Disputes leverage the following subsystems, each with their own configuration:
 
 - **Audit Log:** `COMPLIANCE_AUDIT_SECRET` (min 32 chars) — HMAC key for audit entry tamper-evidence
 - **Notifications:** `WEBHOOK_DELIVERY_TIMEOUT_MS` (default 10000) — per-attempt timeout for webhook deliveries
-- **Database:** `DB_PATH` (default `talenttrust.db`) — SQLite file path; use `:memory:` for ephemeral mode
+- **Database:** `DB_PATH` (default `covenant.db`) — SQLite file path; use `:memory:` for ephemeral mode
 
 ---
 
@@ -333,7 +333,7 @@ Contract transitions to `disputed` successfully (200 OK), but one or both notifi
 3. **Manual notification (if needed):**
    ```bash
    # Query affected contracts
-   sqlite3 talenttrust.db "SELECT id, client_id, freelancer_id FROM contracts WHERE status = 'disputed' AND updated_at > datetime('now', '-1 hour');"
+   sqlite3 covenant.db "SELECT id, client_id, freelancer_id FROM contracts WHERE status = 'disputed' AND updated_at > datetime('now', '-1 hour');"
    
    # Send notification via admin script (if implemented) or contact users directly
    ```
@@ -405,7 +405,7 @@ The authenticated user's role lacks the required permission, or an ownership che
 2. **Check RBAC matrix:** Confirm the action is permitted in `src/lib/authorization.ts` → `PERMISSION_MATRIX`.
 3. **Ownership check:** For `ownOnly` permissions, verify the resource belongs to the authenticated user. Query the database:
    ```bash
-   sqlite3 talenttrust.db "SELECT client_id, freelancer_id FROM contracts WHERE id = '<contract-id>';"
+   sqlite3 covenant.db "SELECT client_id, freelancer_id FROM contracts WHERE id = '<contract-id>';"
    ```
 
 **Source Files:**  
@@ -476,16 +476,16 @@ SQLite write failed due to:
 **Resolution:**  
 1. **Check disk space:**
    ```bash
-   df -h /path/to/talenttrust.db
+   df -h /path/to/covenant.db
    ```
 2. **Check for long-running transactions:** SQLite uses file-level locking. A stalled transaction in another process can block writes.
    ```bash
    # List processes with open file handles to the database
-   lsof /path/to/talenttrust.db
+   lsof /path/to/covenant.db
    ```
 3. **Database integrity check:**
    ```bash
-   sqlite3 talenttrust.db "PRAGMA integrity_check;"
+   sqlite3 covenant.db "PRAGMA integrity_check;"
    ```
 4. **Restart the service** to release stale locks (graceful shutdown triggers WAL checkpoint).
 
@@ -577,13 +577,13 @@ The following metrics are exported at `GET /metrics`:
 
 ```bash
 # List all contracts currently in disputed state
-sqlite3 talenttrust.db "SELECT id, title, client_id, freelancer_id, version, created_at FROM contracts WHERE status = 'disputed' ORDER BY created_at DESC;"
+sqlite3 covenant.db "SELECT id, title, client_id, freelancer_id, version, created_at FROM contracts WHERE status = 'disputed' ORDER BY created_at DESC;"
 
 # Count disputed contracts
-sqlite3 talenttrust.db "SELECT COUNT(*) AS disputed_count FROM contracts WHERE status = 'disputed';"
+sqlite3 covenant.db "SELECT COUNT(*) AS disputed_count FROM contracts WHERE status = 'disputed';"
 
 # Find contracts transitioned to disputed in the last 24 hours
-sqlite3 talenttrust.db "
+sqlite3 covenant.db "
 SELECT id, title, status, version, created_at
 FROM contracts
 WHERE status = 'disputed'
@@ -596,10 +596,10 @@ ORDER BY updated_at DESC;
 
 ```bash
 # Find all PAYMENT_DISPUTED audit entries
-sqlite3 talenttrust.db "SELECT id, timestamp, action, actor, resource_id, metadata FROM audit_log WHERE action = 'PAYMENT_DISPUTED' ORDER BY timestamp DESC LIMIT 20;"
+sqlite3 covenant.db "SELECT id, timestamp, action, actor, resource_id, metadata FROM audit_log WHERE action = 'PAYMENT_DISPUTED' ORDER BY timestamp DESC LIMIT 20;"
 
 # Find disputes by specific contract
-sqlite3 talenttrust.db "
+sqlite3 covenant.db "
 SELECT timestamp, action, actor, metadata
 FROM audit_log
 WHERE action = 'PAYMENT_DISPUTED'
@@ -616,7 +616,7 @@ curl -s -H "Authorization: Bearer <admin-token>" \
   "http://localhost:3001/api/v1/contracts/<contract-id>/history" | jq '.data[] | select(.type | contains("dispute"))'
 
 # Or query the database directly
-sqlite3 talenttrust.db "
+sqlite3 covenant.db "
 SELECT eventId, contractId, eventType, timestamp, payload
 FROM smart_contract_events
 WHERE contractId = '<contract-id>'
@@ -644,21 +644,21 @@ curl -s http://localhost:3001/metrics | grep 'notification_delivery_attempts_tot
 # Search logs for failed notifications
 # (assumes logs are aggregated in a central logging system like Splunk, Datadog, or ELK)
 # Example Datadog query:
-# service:talenttrust-backend level:warn event:DISPUTE_RAISED channels.success:false
+# service:covenant-backend level:warn event:DISPUTE_RAISED channels.success:false
 ```
 
 ### Database Health Check
 
 ```bash
 # Check database file size and integrity
-ls -lh talenttrust.db
-sqlite3 talenttrust.db "PRAGMA integrity_check;"
+ls -lh covenant.db
+sqlite3 covenant.db "PRAGMA integrity_check;"
 
 # Check for locked transactions
-sqlite3 talenttrust.db "PRAGMA wal_checkpoint(PASSIVE);"
+sqlite3 covenant.db "PRAGMA wal_checkpoint(PASSIVE);"
 
 # Verify contracts table schema
-sqlite3 talenttrust.db ".schema contracts"
+sqlite3 covenant.db ".schema contracts"
 ```
 
 ---
@@ -675,7 +675,7 @@ sqlite3 talenttrust.db ".schema contracts"
 
 1. **Identify the contract:**
    ```bash
-   sqlite3 talenttrust.db "SELECT id, version, status, updated_at FROM contracts WHERE id = '<contract-id>';"
+   sqlite3 covenant.db "SELECT id, version, status, updated_at FROM contracts WHERE id = '<contract-id>';"
    ```
 2. **Check for stuck transactions:** If `version` is incrementing rapidly but state is not changing, a background process may be updating the contract.
 3. **Manual intervention (admin-only):**
@@ -688,7 +688,7 @@ sqlite3 talenttrust.db ".schema contracts"
    ```
 4. **Verify resolution:**
    ```bash
-   sqlite3 talenttrust.db "SELECT version, status FROM contracts WHERE id = '<contract-id>';"
+   sqlite3 covenant.db "SELECT version, status FROM contracts WHERE id = '<contract-id>';"
    ```
 
 **Expected Outcome:** Contract transitions to `disputed` with version incremented by 1.
@@ -708,7 +708,7 @@ sqlite3 talenttrust.db ".schema contracts"
 1. **Identify the blocked client:**
    ```bash
    # Search logs for hard-block events
-   grep "Client hard-blocked" /var/log/talenttrust-backend/*.log | grep "tier: disputes"
+   grep "Client hard-blocked" /var/log/covenant-backend/*.log | grep "tier: disputes"
    ```
 2. **Clear the block (requires code change):** The current `RateLimitStore` implementation does not expose a manual unblock API. Recovery options:
    - **Wait for block duration to expire** (`RL_DISPUTES_BLOCK_DURATION_MS`, default 10 minutes)
@@ -735,7 +735,7 @@ sqlite3 talenttrust.db ".schema contracts"
 
 1. **Identify affected contracts:**
    ```bash
-   sqlite3 talenttrust.db "
+   sqlite3 covenant.db "
    SELECT id, client_id, freelancer_id, title
    FROM contracts
    WHERE status = 'disputed'
@@ -746,7 +746,7 @@ sqlite3 talenttrust.db ".schema contracts"
 
 2. **Query user emails:**
    ```bash
-   sqlite3 talenttrust.db "
+   sqlite3 covenant.db "
    SELECT id, email FROM users WHERE id IN (
      SELECT client_id FROM contracts WHERE id = '<contract-id>'
      UNION
@@ -769,7 +769,7 @@ sqlite3 talenttrust.db ".schema contracts"
    - Check email delivery logs or notification service dashboards
    - Query notification repository (if implemented):
      ```bash
-     sqlite3 talenttrust.db "SELECT * FROM notifications WHERE user_id IN ('<client-id>', '<freelancer-id>') ORDER BY created_at DESC LIMIT 10;"
+     sqlite3 covenant.db "SELECT * FROM notifications WHERE user_id IN ('<client-id>', '<freelancer-id>') ORDER BY created_at DESC LIMIT 10;"
      ```
 
 **Expected Outcome:** Users receive notifications and are aware of the dispute status.
@@ -788,7 +788,7 @@ sqlite3 talenttrust.db ".schema contracts"
 
 1. **Verify current state:**
    ```bash
-   sqlite3 talenttrust.db "SELECT id, status, version FROM contracts WHERE id = '<contract-id>';"
+   sqlite3 covenant.db "SELECT id, status, version FROM contracts WHERE id = '<contract-id>';"
    ```
 
 2. **Determine valid path:**
@@ -816,11 +816,11 @@ sqlite3 talenttrust.db ".schema contracts"
 
 1. **Check disk usage:**
    ```bash
-   df -h /path/to/talenttrust.db
+   df -h /path/to/covenant.db
    ```
 
 2. **Free disk space:**
-   - Archive old logs: `tar -czf logs-$(date +%Y%m%d).tar.gz /var/log/talenttrust-backend/*.log && rm /var/log/talenttrust-backend/*.log.1`
+   - Archive old logs: `tar -czf logs-$(date +%Y%m%d).tar.gz /var/log/covenant-backend/*.log && rm /var/log/covenant-backend/*.log.1`
    - Purge expired retention data (if retention subsystem is active)
    - Move database backups to external storage
 
@@ -970,7 +970,7 @@ This runbook must be updated whenever the disputes subsystem changes. Maintainer
 | Dispute Lifecycle | New status added or transition rule changed | Verify against `src/db/migrations.ts` (CHECK constraint), `src/services/contracts.service.ts` |
 | Common Failure Modes | New error code or failure path introduced | Review test suite, integration tests, and error handling code |
 | Alerts Reference | New metric added or alert threshold changed | Verify against `src/observability/metrics-service.ts`, Prometheus scrape config |
-| Diagnostic Commands | Database schema changed | Verify queries against `sqlite3 talenttrust.db ".schema"` |
+| Diagnostic Commands | Database schema changed | Verify queries against `sqlite3 covenant.db ".schema"` |
 | Recovery Procedures | New admin endpoint or operational tool added | Verify against `src/routes/admin.routes.ts` |
 | Security Notes | Auth model or RBAC rules changed | Verify against `src/lib/authorization.ts` → `PERMISSION_MATRIX` |
 

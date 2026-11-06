@@ -1,6 +1,6 @@
 # Error Message Security Policy
 
-This document defines the safe error message policy enforced by the TalentTrust backend. The goal is to prevent information disclosure through API error responses (CWE-209, OWASP A01:2021).
+This document defines the safe error message policy enforced by the Covenant backend. The goal is to prevent information disclosure through API error responses (CWE-209, OWASP A01:2021).
 
 ## Principles
 

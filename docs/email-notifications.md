@@ -202,5 +202,5 @@ AWS_REGION=us-east-1
 SENDGRID_API_KEY=__set_me__     # secret
 
 # Web-notification persistence
-DB_PATH=talenttrust.db
+DB_PATH=covenant.db
 ```

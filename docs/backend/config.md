@@ -1,6 +1,6 @@
 # Configuration Guide
 
-TalentTrust Backend uses a centralized configuration module located at
+Covenant Backend uses a centralized configuration module located at
 `src/config/` and a composition root at `src/appConfiguration.ts`. All environment variables are parsed, validated, and
 type-checked at startup so misconfigurations fail fast with a clear error
 message.

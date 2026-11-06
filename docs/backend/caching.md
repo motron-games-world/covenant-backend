@@ -1,6 +1,6 @@
 # Caching Layer (Stale-While-Revalidate)
 
-The TalentTrust Backend implements a robust Stale-While-Revalidate (SWR) caching mechanism. This enables high availability and resilience when querying slower upstream dependencies like the Stellar/Soroban RPC or external APIs.
+The Covenant Backend implements a robust Stale-While-Revalidate (SWR) caching mechanism. This enables high availability and resilience when querying slower upstream dependencies like the Stellar/Soroban RPC or external APIs.
 
 ## Architecture
 

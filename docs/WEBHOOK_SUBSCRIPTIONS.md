@@ -1,6 +1,6 @@
 # Webhook Subscription Registry
 
-TalentTrust-Backend supports per-consumer API endpoints subscription for webhook events. Consumers can register endpoints to receive real-time notifications when events occur.
+Covenant-Backend supports per-consumer API endpoints subscription for webhook events. Consumers can register endpoints to receive real-time notifications when events occur.
 
 ## Database Schema
 

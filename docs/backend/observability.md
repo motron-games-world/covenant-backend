@@ -1,6 +1,6 @@
 # Backend Observability
 
-This document explains service-level health signaling and Prometheus metrics exposure in `Talenttrust-Backend`.
+This document explains service-level health signaling and Prometheus metrics exposure in `Covenant-Backend`.
 
 ## Endpoints
 
@@ -11,7 +11,7 @@ Returns process liveness only.
 ```json
 {
   "status": "up",
-  "service": "talenttrust-backend"
+  "service": "covenant-backend"
 }
 ```
 
@@ -21,7 +21,7 @@ Returns service-level health with runtime and dependency signals.
 
 ```json
 {
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "status": "up",
   "timestamp": "2026-03-24T00:00:00.000Z",
   "uptimeSeconds": 102.34,
@@ -58,7 +58,7 @@ If auth is missing/invalid, route returns `401`.
 | Variable | Default | Notes |
 |---|---|---|
 | `PORT` | `3001` | API listener port |
-| `SERVICE_NAME` | `talenttrust-backend` | Name used in health payload and metrics labels |
+| `SERVICE_NAME` | `covenant-backend` | Name used in health payload and metrics labels |
 | `METRICS_ENABLED` | `true` | Set to `false` to return `404` on `/metrics` |
 | `METRICS_AUTH_TOKEN` | _unset_ | Enables bearer-token protection for `/metrics` |
 | `HTTP_METRICS_ROUTE_LABEL_LIMIT` | `100` | Maximum distinct HTTP route template labels before new routes are recorded as `other` |
@@ -105,10 +105,10 @@ Mitigation:
 
 ```yaml
 scrape_configs:
-  - job_name: talenttrust-backend
+  - job_name: covenant-backend
     metrics_path: /metrics
     static_configs:
-      - targets: ['talenttrust-backend:3001']
+      - targets: ['covenant-backend:3001']
     authorization:
       type: Bearer
       credentials: ${METRICS_AUTH_TOKEN}

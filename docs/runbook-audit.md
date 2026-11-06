@@ -1,6 +1,6 @@
 # Audit Subsystem Operations Runbook
 
-This document is the operator- and on-call-facing runbook for the TalentTrust
+This document is the operator- and on-call-facing runbook for the Covenant
 audit subsystem. It covers configuration, common failure modes, alert symptom
 triage, and step-by-step recovery procedures.
 
@@ -95,7 +95,7 @@ Cryptographic proof for retention/archival/deletion:
 | Variable | Default | Purpose | Validation |
 |----------|---------|---------|------------|
 | `AUDIT_STORAGE_BACKEND` | `memory` | `memory` or `sqlite` | Must be `memory` or `sqlite`; case-sensitive |
-| `AUDIT_DB_PATH` | `talenttrust-audit.db` | SQLite file path | Writable path; use `:memory:` for tests |
+| `AUDIT_DB_PATH` | `covenant-audit.db` | SQLite file path | Writable path; use `:memory:` for tests |
 | `COMPLIANCE_AUDIT_SECRET` | _(required)_ | HMAC secret for compliance audit proofs | Min 32 characters |
 
 ### 2.2 Rate limit configuration
@@ -229,7 +229,7 @@ ls -la $(dirname $AUDIT_DB_PATH)
 # 4. If DB corrupted, restore from backup
 # 5. If memory backend, switch to SQLite:
 export AUDIT_STORAGE_BACKEND=sqlite
-export AUDIT_DB_PATH=/var/lib/talenttrust/audit.db
+export AUDIT_DB_PATH=/var/lib/covenant/audit.db
 ```
 
 **Automatic recovery (SQLite backend):** the repository already attempts the
@@ -424,7 +424,7 @@ date -u
 # 1. Stop the process
 # 2. Set new backend
 export AUDIT_STORAGE_BACKEND=sqlite
-export AUDIT_DB_PATH=/var/lib/talenttrust/audit.db
+export AUDIT_DB_PATH=/var/lib/covenant/audit.db
 
 # 3. Start the process
 # 4. Verify: curl -H "Authorization: Bearer $TOKEN" /api/v1/audit/integrity

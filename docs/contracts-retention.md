@@ -1,6 +1,6 @@
 # Contracts Data Retention
 
-This document describes the data retention policy, storage behavior, and PII handling for Freelancer Escrow Contracts in the Talenttrust-Backend system.
+This document describes the data retention policy, storage behavior, and PII handling for Freelancer Escrow Contracts in the Covenant-Backend system.
 
 ## 1. What's Stored
 

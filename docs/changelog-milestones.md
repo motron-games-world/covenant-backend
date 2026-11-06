@@ -3,7 +3,7 @@
 All notable changes to the Milestones API are documented here. Milestones are
 exposed through the Contracts API under `/api/v1/contracts`.
 
-This file is scoped to `Talenttrust/Talenttrust-Backend` only. Any PR that
+This file is scoped to `Covenant/Covenant-Backend` only. Any PR that
 changes milestone endpoints, request or response shapes, validation or bounds,
 feature flags, authentication requirements, soft-delete behaviour, or related
 observable API behaviour must add a concise entry here and link this changelog

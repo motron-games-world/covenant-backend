@@ -1,7 +1,7 @@
 # Runbook: Health Subsystem
 
 This runbook covers configuration, failure modes, alert thresholds, and
-recovery steps for all health endpoints in `Talenttrust-Backend`.
+recovery steps for all health endpoints in `Covenant-Backend`.
 
 **Audience:** On-call engineers, SREs, and DevOps  
 **Last updated:** see git log  
@@ -53,7 +53,7 @@ All four set `Cache-Control: no-store` on responses.
 | Variable | Default | Description |
 |---|---|---|
 | `NODE_ENV` | `development` | Set to `production` to strip `detail` fields from responses |
-| `SERVICE_NAME` | `talenttrust-backend` | Service label in all health response bodies |
+| `SERVICE_NAME` | `covenant-backend` | Service label in all health response bodies |
 | `ACTIVE_COLOR` | `blue` | Blue-green slot label included in `/health/ready` responses |
 | `REQUIRED_ENV_VARS` | `""` | Comma-separated list of env var names the `env` probe checks |
 | `REDIS_HOST` | `localhost` | Redis hostname for the `redis` probe |

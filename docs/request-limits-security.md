@@ -1,6 +1,6 @@
 # Request Limits Security Architecture
 
-This document describes the design and configuration of the streaming request body-size limit enforcer implemented in TalentTrust.
+This document describes the design and configuration of the streaming request body-size limit enforcer implemented in Covenant.
 
 ## 1. Threat Model & Security Goals
 
@@ -71,7 +71,7 @@ All request limits are configurable via environment variables and validated at s
 
 ## 4. Safe Error Responses
 
-TalentTrust adheres to a strict safe error message policy (defined in `src/errors/safeErrors.ts`). Under this policy:
+Covenant adheres to a strict safe error message policy (defined in `src/errors/safeErrors.ts`). Under this policy:
 - No user-supplied content is reflected in error messages.
 - The machine-readable code returned is `payload_too_large` or `unsupported_media_type`.
 - The human-readable messages returned are static strings:

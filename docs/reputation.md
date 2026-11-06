@@ -1,6 +1,6 @@
 # Reputation API
 
-Reference documentation for the TalentTrust Backend reputation endpoints.
+Reference documentation for the Covenant Backend reputation endpoints.
 Every section maps directly to the source code; cross-references are noted inline.
 
 ## Table of contents

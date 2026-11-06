@@ -1,10 +1,10 @@
 # Redis Testing Guide
 
-This guide explains how Redis is used in the TalentTrust Backend testing environment, when a real Redis instance is required, and how to reproduce queue test behavior locally.
+This guide explains how Redis is used in the Covenant Backend testing environment, when a real Redis instance is required, and how to reproduce queue test behavior locally.
 
 ## Architecture Overview
 
-TalentTrust uses **BullMQ** (backed by **Redis**) for background job processing. To ensure tests are fast, deterministic, and can run in environments without Redis, we employ a hybrid approach using global mocks and CI-specific service containers.
+Covenant uses **BullMQ** (backed by **Redis**) for background job processing. To ensure tests are fast, deterministic, and can run in environments without Redis, we employ a hybrid approach using global mocks and CI-specific service containers.
 
 ## Mocking Strategy
 
@@ -43,7 +43,7 @@ In GitHub Actions, we run the full test suite with a real Redis service.
 The easiest way to run a real Redis locally is via Docker:
 
 ```bash
-docker run -d --name talenttrust-redis -p 6379:6379 redis:7-alpine
+docker run -d --name covenant-redis -p 6379:6379 redis:7-alpine
 ```
 
 ### 2. Run All Tests (Including Queue Tests)

@@ -1,6 +1,6 @@
 # Milestones API Contract
 
-Milestones in TalentTrust are a first-class field on the Contract resource. There are no standalone milestone endpoints — all milestone operations flow through the contracts API.
+Milestones in Covenant are a first-class field on the Contract resource. There are no standalone milestone endpoints — all milestone operations flow through the contracts API.
 
 **Cross-references:** [`src/routes/contracts.routes.ts`](../src/routes/contracts.routes.ts), [`src/modules/contracts/dto/contract.dto.ts`](../src/modules/contracts/dto/contract.dto.ts), [`src/contracts/bounds.ts`](../src/contracts/bounds.ts)
 

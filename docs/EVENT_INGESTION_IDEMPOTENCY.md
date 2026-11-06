@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Talenttrust backend implements an idempotent contract event ingestion pipeline
+The Covenant backend implements an idempotent contract event ingestion pipeline
 that guarantees safe event processing with strict schema validation,
 deduplication, payload integrity checks, and auditability.
 

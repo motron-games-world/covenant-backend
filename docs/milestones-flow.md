@@ -1,6 +1,6 @@
 # Milestones Request Lifecycle
 
-Milestones in TalentTrust are a first-class field on the Contract resource. There are no standalone milestone endpoints — all milestone operations flow through the contracts API via three routes:
+Milestones in Covenant are a first-class field on the Contract resource. There are no standalone milestone endpoints — all milestone operations flow through the contracts API via three routes:
 
 | Method | Path | Operation |
 |--------|------|-----------|

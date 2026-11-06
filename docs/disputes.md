@@ -1,6 +1,6 @@
 # Disputes API
 
-TalentTrust disputes are not managed through a dedicated `/api/v1/disputes` resource. They are surfaced through two existing infrastructure paths:
+Covenant disputes are not managed through a dedicated `/api/v1/disputes` resource. They are surfaced through two existing infrastructure paths:
 
 1. **Contract status transitions** — a contract moves to `status: "disputed"` via `PATCH /api/v1/contracts/:id`.
 2. **Smart-contract event ingestion** — on-chain dispute lifecycle events (`dispute:initiated`, `dispute:resolved`) are indexed via `POST /api/v1/events`.
@@ -130,7 +130,7 @@ Additional updatable fields (`title`, `description`, `budget`, `deadline`, `term
 **Full example:**
 
 ```bash
-curl -X PATCH https://api.talenttrust.io/api/v1/contracts/c1a2b3d4-e5f6-7890-abcd-ef1234567890 \
+curl -X PATCH https://api.covenant.io/api/v1/contracts/c1a2b3d4-e5f6-7890-abcd-ef1234567890 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer demo-user-token" \
   -d '{
@@ -191,7 +191,7 @@ PATCH /api/v1/contracts/:id
 **Full example:**
 
 ```bash
-curl -X PATCH https://api.talenttrust.io/api/v1/contracts/c1a2b3d4-e5f6-7890-abcd-ef1234567890 \
+curl -X PATCH https://api.covenant.io/api/v1/contracts/c1a2b3d4-e5f6-7890-abcd-ef1234567890 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer demo-admin-token" \
   -d '{
@@ -244,7 +244,7 @@ GET /api/v1/contracts?status=disputed
 
 ```bash
 curl -H "Authorization: Bearer demo-admin-token" \
-  "https://api.talenttrust.io/api/v1/contracts?status=disputed&page=1&limit=20"
+  "https://api.covenant.io/api/v1/contracts?status=disputed&page=1&limit=20"
 ```
 
 ---
@@ -338,7 +338,7 @@ POST /api/v1/events
 **Full example — initiate dispute event:**
 
 ```bash
-curl -X POST https://api.talenttrust.io/api/v1/events \
+curl -X POST https://api.covenant.io/api/v1/events \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer demo-admin-token" \
   -H "Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000" \
@@ -406,7 +406,7 @@ POST /api/v1/events/validate
 **Full example:**
 
 ```bash
-curl -X POST https://api.talenttrust.io/api/v1/events/validate \
+curl -X POST https://api.covenant.io/api/v1/events/validate \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer demo-user-token" \
   -d '{
@@ -476,7 +476,7 @@ GET /api/v1/audit
 
 ```bash
 curl -H "Authorization: Bearer demo-admin-token" \
-  "https://api.talenttrust.io/api/v1/audit?action=PAYMENT_DISPUTED&resourceId=c1a2b3d4-e5f6-7890-abcd-ef1234567890"
+  "https://api.covenant.io/api/v1/audit?action=PAYMENT_DISPUTED&resourceId=c1a2b3d4-e5f6-7890-abcd-ef1234567890"
 ```
 
 **Export as NDJSON/CSV (for compliance):**
@@ -484,11 +484,11 @@ curl -H "Authorization: Bearer demo-admin-token" \
 ```bash
 # NDJSON (default)
 curl -H "Authorization: Bearer demo-admin-token" \
-  "https://api.talenttrust.io/api/v1/audit/export?action=PAYMENT_DISPUTED"
+  "https://api.covenant.io/api/v1/audit/export?action=PAYMENT_DISPUTED"
 
 # CSV
 curl -H "Authorization: Bearer demo-admin-token" \
-  "https://api.talenttrust.io/api/v1/audit/export?action=PAYMENT_DISPUTED" \
+  "https://api.covenant.io/api/v1/audit/export?action=PAYMENT_DISPUTED" \
   -H "Accept: text/csv"
 ```
 
@@ -550,7 +550,7 @@ GET /api/v1/contracts/:contractId/history
 
 ```bash
 curl -H "Authorization: Bearer demo-user-token" \
-  "https://api.talenttrust.io/api/v1/contracts/c1a2b3d4-e5f6-7890-abcd-ef1234567890/history"
+  "https://api.covenant.io/api/v1/contracts/c1a2b3d4-e5f6-7890-abcd-ef1234567890/history"
 ```
 
 ---

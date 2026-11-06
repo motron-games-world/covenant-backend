@@ -1,10 +1,10 @@
 # Database Integration Layer
 
-> Reference documentation for the TalentTrust persistence layer.
+> Reference documentation for the Covenant persistence layer.
 
 ## Overview
 
-TalentTrust uses **SQLite** (via [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3)) as its embedded relational database. The database is opened as a singleton on application startup and all writes go through typed repository classes.
+Covenant uses **SQLite** (via [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3)) as its embedded relational database. The database is opened as a singleton on application startup and all writes go through typed repository classes.
 
 SQLite was chosen because:
 
@@ -19,7 +19,7 @@ SQLite was chosen because:
 
 | Environment variable | Default          | Description                                   |
 | -------------------- | ---------------- | --------------------------------------------- |
-| `DB_PATH`            | `talenttrust.db` | Absolute or relative path to the SQLite file. |
+| `DB_PATH`            | `covenant.db` | Absolute or relative path to the SQLite file. |
 
 Set `DB_PATH=:memory:` to use an **in-memory** database (data is lost on process exit).
 
@@ -166,7 +166,7 @@ When multiple processes access the database, SQLite may return `SQLITE_BUSY`. Th
 | SQL injection     | All queries use `better-sqlite3` **prepared statements** with parameter binding — no string interpolation. |
 | CHECK constraints | `status` and `role` columns are validated at the DB level as a second line of defence.                     |
 | FK enforcement    | `PRAGMA foreign_keys = ON` is set on every connection to prevent orphaned records.                         |
-| File permissions  | In production, restrict the DB file: `chmod 600 talenttrust.db`.                                           |
+| File permissions  | In production, restrict the DB file: `chmod 600 covenant.db`.                                           |
 | Credentials       | No passwords are stored. Authentication is delegated to Stellar key-based or third-party auth.             |
 
 ---

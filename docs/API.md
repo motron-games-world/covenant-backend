@@ -35,11 +35,11 @@ Use `ok(res, data, meta?, status?)` and `fail(res, code, message, status?)` from
 - `meta` is omitted from the response when not provided
 
 ---
-# TalentTrust Backend API Documentation
+# Covenant Backend API Documentation
 
 ## Overview
 
-The TalentTrust Backend API provides RESTful endpoints for managing escrow contract metadata. This API follows a modular architecture with proper separation of concerns, authentication, validation, and comprehensive error handling.
+The Covenant Backend API provides RESTful endpoints for managing escrow contract metadata. This API follows a modular architecture with proper separation of concerns, authentication, validation, and comprehensive error handling.
 
 ## Base URL
 
@@ -960,7 +960,7 @@ Returns process liveness only. This endpoint should stay up even while dependenc
 ```json
 {
   "status": "ok",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "probe": "live"
 }
 ```
@@ -973,7 +973,7 @@ Returns readiness for traffic. It checks SQLite, the Soroban RPC endpoint, and t
 ```json
 {
   "status": "ready",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "probe": "ready",
   "activeColor": "blue",
   "checks": [

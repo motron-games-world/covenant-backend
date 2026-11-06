@@ -1,6 +1,6 @@
 # Audit API Contract
 
-The audit API provides immutable, tamper-evident logging of all sensitive state changes in TalentTrust. Every entry is linked via a SHA-256 hash chain, enabling integrity verification.
+The audit API provides immutable, tamper-evident logging of all sensitive state changes in Covenant. Every entry is linked via a SHA-256 hash chain, enabling integrity verification.
 
 **Cross-references:** [`src/audit/router.ts`](../src/audit/router.ts), [`src/audit/types.ts`](../src/audit/types.ts), [`src/audit/service.ts`](../src/audit/service.ts)
 
@@ -483,6 +483,6 @@ Configured via environment variables:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `AUDIT_STORAGE_BACKEND` | `memory` | `memory` or `sqlite` |
-| `AUDIT_DB_PATH` | `talenttrust-audit.db` | SQLite file path (or `:memory:` in test) |
+| `AUDIT_DB_PATH` | `covenant-audit.db` | SQLite file path (or `:memory:` in test) |
 
 Source: [`src/audit/repository.ts:19-38`](../src/audit/repository.ts#L19-L38)

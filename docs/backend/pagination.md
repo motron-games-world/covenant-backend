@@ -1,6 +1,6 @@
 # Pagination
 
-All list endpoints in TalentTrust Backend share a common pagination helper found in
+All list endpoints in Covenant Backend share a common pagination helper found in
 `src/utils/pagination.ts`. This document covers the design decisions, public API, and
 the bounds/rejection policy that every endpoint must follow.
 

@@ -1,13 +1,13 @@
 # Role-Based Authorization — Technical Reference
 
 > **Branch:** `feature/backend-06-role-based-authorization`  
-> **Scope:** `Talenttrust/Talenttrust-Backend`
+> **Scope:** `Covenant/Covenant-Backend`
 
 ---
 
 ## Overview
 
-The authorization system enforces role-scoped permissions across all Talenttrust API endpoints. It is implemented as a three-layer stack:
+The authorization system enforces role-scoped permissions across all Covenant API endpoints. It is implemented as a three-layer stack:
 
 ```
 HTTP Request

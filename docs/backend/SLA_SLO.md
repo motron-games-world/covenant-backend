@@ -1,6 +1,6 @@
 # Service Level Agreements (SLA) & Service Level Objectives (SLO)
 
-This document outlines the Service Objectives and Alert Thresholds implemented for the TalentTrust Backend operations. Setting these operational metrics allows us to proactively track performance, ensure high availability, and configure reliable alerts when our service degrades.
+This document outlines the Service Objectives and Alert Thresholds implemented for the Covenant Backend operations. Setting these operational metrics allows us to proactively track performance, ensure high availability, and configure reliable alerts when our service degrades.
 
 ## Core Concepts
 

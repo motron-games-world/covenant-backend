@@ -8,7 +8,7 @@
  * used only once per process (see replay protection note).
  *
  * Challenge format:
- *   `talenttrust-auth:<base64url(payload)>.<hex(hmac)>`
+ *   `covenant-auth:<base64url(payload)>.<hex(hmac)>`
  *
  * where payload = JSON({ address, nonce, iat, exp, aud }) and
  * hmac = HMAC-SHA256(payloadB64, AUTH_SECRET).
@@ -25,8 +25,8 @@ import { createHmac, timingSafeEqual, randomBytes } from 'crypto';
 import { LRUCache } from 'lru-cache';
 
 export const CHALLENGE_TTL_SECONDS = 300; // 5 minutes
-export const CHALLENGE_AUD = 'talenttrust-api';
-export const CHALLENGE_PREFIX = 'talenttrust-auth:';
+export const CHALLENGE_AUD = 'covenant-api';
+export const CHALLENGE_PREFIX = 'covenant-auth:';
 
 /**
  * Payload embedded in the challenge string.
@@ -36,7 +36,7 @@ export interface ChallengePayload {
   nonce: string; // hex-encoded 16 random bytes
   iat: number; // epoch seconds
   exp: number; // epoch seconds (iat + CHALLENGE_TTL_SECONDS)
-  aud: string; // 'talenttrust-api'
+  aud: string; // 'covenant-api'
 }
 
 /**
@@ -97,7 +97,7 @@ export type ChallengeError =
  * Verify a challenge string.
  *
  * Steps:
- *  1. Parse the `talenttrust-auth:<payload>.<hmac>` format.
+ *  1. Parse the `covenant-auth:<payload>.<hmac>` format.
  *  2. Recompute the HMAC and compare constant-time.
  *  3. Decode and validate the payload structure.
  *  4. Check that payload.address matches the claimed address.

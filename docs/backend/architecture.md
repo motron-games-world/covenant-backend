@@ -1,4 +1,4 @@
-# Architecture — TalentTrust Backend
+# Architecture — Covenant Backend
 
 ## Module Layout
 

@@ -51,9 +51,9 @@ describe('Server-signed Escrow Receipts (Issue #1604)', () => {
     });
   });
 
-  describe('Published Keys (/.well-known/talenttrust-receipts.json)', () => {
+  describe('Published Keys (/.well-known/covenant-receipts.json)', () => {
     it('serves published keys in JWK and Stellar format', async () => {
-      const res = await request(app).get('/.well-known/talenttrust-receipts.json').expect(200);
+      const res = await request(app).get('/.well-known/covenant-receipts.json').expect(200);
       expect(res.body.keys).toBeDefined();
       expect(Array.isArray(res.body.keys)).toBe(true);
       expect(res.body.keys.length).toBeGreaterThan(0);
@@ -249,7 +249,7 @@ describe('Server-signed Escrow Receipts (Issue #1604)', () => {
       const health = await request(app).get('/health');
       expect(JSON.stringify(health.body)).not.toContain(secret);
 
-      const keys = await request(app).get('/.well-known/talenttrust-receipts.json');
+      const keys = await request(app).get('/.well-known/covenant-receipts.json');
       expect(JSON.stringify(keys.body)).not.toContain(secret);
 
       const openapiRes = await request(app).get('/openapi.json');

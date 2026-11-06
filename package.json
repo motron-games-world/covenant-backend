@@ -1,7 +1,7 @@
 {
-  "name": "talenttrust-backend",
+  "name": "covenant-backend",
   "version": "1.0.0",
-  "description": "TalentTrust API: milestone escrow API backed by a Soroban contract on Stellar",
+  "description": "Covenant API: milestone escrow API backed by a Soroban contract on Stellar",
   "main": "dist/src/index.js",
   "private": true,
   "scripts": {

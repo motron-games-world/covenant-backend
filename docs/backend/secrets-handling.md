@@ -238,7 +238,7 @@ silently falling back to a committed default.
 
 - Required in production/staging (no fallback).
 - The known development placeholder
-  (`postgresql://localhost:5432/talenttrust`) is rejected even if explicitly
+  (`postgresql://localhost:5432/covenant`) is rejected even if explicitly
   set, for the same reason.
 
 ## Why fail-fast

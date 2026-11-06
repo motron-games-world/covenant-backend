@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides a comprehensive reference for the metrics API endpoints in Talenttrust-Backend. The metrics endpoints expose Prometheus-formatted metrics for monitoring, alerting, and observability purposes.
+This document provides a comprehensive reference for the metrics API endpoints in Covenant-Backend. The metrics endpoints expose Prometheus-formatted metrics for monitoring, alerting, and observability purposes.
 
 **Target Audience:**
 - DevOps engineers configuring Prometheus scraping
@@ -85,7 +85,7 @@ http_request_duration_seconds_count{method="GET",route="/health",status_code="20
 
 # HELP service_health_status Current service health status. up=2, degraded=1, down=0.
 # TYPE service_health_status gauge
-service_health_status{service="talenttrust-backend"} 2
+service_health_status{service="covenant-backend"} 2
 
 # HELP webhook_deliveries_total Total webhook delivery attempts by outcome.
 # TYPE webhook_deliveries_total counter
@@ -134,7 +134,7 @@ The `/metrics` endpoint exports the following metric families:
 | `webhook_delivery_latency_seconds` | Histogram | Webhook delivery latency in seconds | `webhookMetrics.ts` |
 | `webhook_delivery_retries_total` | Counter | Total webhook delivery retries | `webhookMetrics.ts` |
 | `webhook_breaker_state` | Gauge | Circuit breaker state per provider (0=CLOSED, 1=OPEN, 2=HALF_OPEN) | `webhookMetrics.ts` |
-| `talenttrust_backend_*` | Various | Node.js runtime metrics (heap, CPU, GC, etc.) | `prom-client` |
+| `covenant_backend_*` | Various | Node.js runtime metrics (heap, CPU, GC, etc.) | `prom-client` |
 
 ### Reputation observability labels
 
@@ -436,7 +436,7 @@ res.status(401).json({ error: "Unauthorized" });
 
 ```yaml
 scrape_configs:
-  - job_name: 'talenttrust-backend'
+  - job_name: 'covenant-backend'
     metrics_path: '/metrics'
     static_configs:
       - targets: ['localhost:3001']
@@ -450,10 +450,10 @@ scrape_configs:
 
 ```yaml
 scrape_configs:
-  - job_name: 'talenttrust-backend'
+  - job_name: 'covenant-backend'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['talenttrust-backend:3001']
+      - targets: ['covenant-backend:3001']
     authorization:
       type: Bearer
       credentials: 'super-secret-token-12345'
@@ -465,7 +465,7 @@ scrape_configs:
 
 ```yaml
 scrape_configs:
-  - job_name: 'talenttrust-backend'
+  - job_name: 'covenant-backend'
     metrics_path: '/metrics'
     static_configs:
       - targets: ['${BACKEND_HOST}:${BACKEND_PORT}']
@@ -579,7 +579,7 @@ else:
 | `METRICS_AUTH_TOKEN` | string | No | None | Bearer token for `/metrics` endpoint authentication. When set, all requests must include matching token. |
 | `METRICS_ENABLED` | boolean | No | `true` | Enable or disable metrics endpoint. Accepted values: `true`, `1`, `yes`, `on` (enabled); `false`, `0`, `no`, `off` (disabled). |
 | `HTTP_METRICS_ROUTE_LABEL_LIMIT` | integer | No | `100` | Maximum number of distinct route labels tracked in HTTP metrics. Range: 1-10000. |
-| `SERVICE_NAME` | string | No | `talenttrust-backend` | Service name used as prefix for default Node.js runtime metrics. |
+| `SERVICE_NAME` | string | No | `covenant-backend` | Service name used as prefix for default Node.js runtime metrics. |
 | `PORT` | integer | No | `3001` | HTTP server port where `/metrics` endpoint is exposed. |
 
 ---
@@ -595,7 +595,7 @@ else:
 # Use default settings
 METRICS_ENABLED=true
 HTTP_METRICS_ROUTE_LABEL_LIMIT=100
-SERVICE_NAME=talenttrust-backend
+SERVICE_NAME=covenant-backend
 PORT=3001
 ```
 
@@ -610,7 +610,7 @@ METRICS_AUTH_TOKEN=generate-secure-random-token-here
 # Enable metrics with production limits
 METRICS_ENABLED=true
 HTTP_METRICS_ROUTE_LABEL_LIMIT=250
-SERVICE_NAME=talenttrust-backend
+SERVICE_NAME=covenant-backend
 PORT=3001
 ```
 
@@ -951,7 +951,7 @@ curl http://localhost:3001/metrics
 kubectl logs prometheus-pod-name
 
 # 4. Verify network connectivity from Prometheus to application
-kubectl exec -it prometheus-pod-name -- wget -O- http://talenttrust-backend:3001/metrics
+kubectl exec -it prometheus-pod-name -- wget -O- http://covenant-backend:3001/metrics
 ```
 
 ---
@@ -999,4 +999,4 @@ kubectl exec -it prometheus-pod-name -- wget -O- http://talenttrust-backend:3001
 
 **Document Version:** 1.0.0  
 **Last Updated:** 2026-07-24  
-**Issue Reference:** [#694](https://github.com/Talenttrust/Talenttrust-Backend/issues/694)
+**Issue Reference:** #694 (original repository)

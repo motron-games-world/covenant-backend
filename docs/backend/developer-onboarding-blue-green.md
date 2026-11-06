@@ -1,6 +1,6 @@
 # Backend Developer Onboarding and Blue-Green Setup
 
-This guide helps new contributors get the TalentTrust backend running locally and understand the blue/green development scripts used by the deployment workflow.
+This guide helps new contributors get the Covenant backend running locally and understand the blue/green development scripts used by the deployment workflow.
 
 ## Prerequisites
 

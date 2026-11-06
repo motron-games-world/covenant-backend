@@ -1,7 +1,7 @@
 # Reputation Operations Runbook
 
 This runbook is for operators diagnosing reputation API and score recomputation
-problems in TalentTrust Backend. It reflects the current implementation, including
+problems in Covenant Backend. It reflects the current implementation, including
 the places where recovery still requires an application maintenance action.
 
 ## Architecture
@@ -48,7 +48,7 @@ rather than an acceptable production state.
 
 | Variable | Default | Effect |
 |---|---:|---|
-| `DB_PATH` | `talenttrust.db` | SQLite file containing `reputation_entries` |
+| `DB_PATH` | `covenant.db` | SQLite file containing `reputation_entries` |
 | `REDIS_HOST` | `localhost` | BullMQ Redis host |
 | `REDIS_PORT` | `6379` | BullMQ Redis port |
 | `REDIS_PASSWORD` | unset | Redis password; treat as a secret |

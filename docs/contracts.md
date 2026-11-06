@@ -1,16 +1,16 @@
 # Contracts API Documentation
 
-This document provides comprehensive reference for the TalentTrust Contracts API endpoints. All endpoints require authentication (Bearer token in `Authorization` header) and follow standard error envelopes.
+This document provides comprehensive reference for the Covenant Contracts API endpoints. All endpoints require authentication (Bearer token in `Authorization` header) and follow standard error envelopes.
 
 ## Overview
 
-The Contracts API manages escrow contracts on the TalentTrust platform. It supports CRUD operations, pagination, optimistic concurrency control, and policy bounds enforcement.
+The Contracts API manages escrow contracts on the Covenant platform. It supports CRUD operations, pagination, optimistic concurrency control, and policy bounds enforcement.
 
 ## General Information
 
 ### Base URL
 ```
-https://api.talenttrust.com/api/v1/contracts
+https://api.covenant.com/api/v1/contracts
 ```
 
 ### Authentication

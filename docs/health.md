@@ -1,6 +1,6 @@
 # Health API Reference
 
-The TalentTrust Backend exposes three health endpoints, all mounted under `/health`.
+The Covenant Backend exposes three health endpoints, all mounted under `/health`.
 Together they serve load-balancer readiness checks, blue-green deployment orchestration,
 and integration-level dependency diagnostics.
 
@@ -42,7 +42,7 @@ load balancers can act on it without parsing the body.
 ```ts
 {
   status:        "ok" | "degraded";  // aggregate verdict
-  service:       string;             // always "talenttrust-backend"
+  service:       string;             // always "covenant-backend"
   timestamp:     string;             // ISO-8601 time of the check
   uptimeSeconds: number;             // process.uptime() in whole seconds
   probes:        ProbeResult[];      // one entry per registered probe
@@ -75,7 +75,7 @@ curl http://localhost:3001/health
 ```json
 {
   "status": "ok",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "timestamp": "2026-07-24T12:49:31.799Z",
   "uptimeSeconds": 3721,
   "probes": [
@@ -94,7 +94,7 @@ curl http://localhost:3001/health
 ```json
 {
   "status": "degraded",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "timestamp": "2026-07-24T12:49:31.799Z",
   "uptimeSeconds": 3721,
   "probes": [
@@ -129,7 +129,7 @@ of dependency state — it does **not** run probes.
 ```json
 {
   "status": "ok",
-  "service": "talenttrust-backend"
+  "service": "covenant-backend"
 }
 ```
 
@@ -140,7 +140,7 @@ curl -X POST http://localhost:3001/health
 ```
 
 ```json
-{ "status": "ok", "service": "talenttrust-backend" }
+{ "status": "ok", "service": "covenant-backend" }
 ```
 
 ---
@@ -170,7 +170,7 @@ or load-balancer liveness check that should almost never fail.
 ```ts
 {
   status:  "ok";
-  service: string;   // SERVICE_NAME env var, defaults to "talenttrust-backend"
+  service: string;   // SERVICE_NAME env var, defaults to "covenant-backend"
   probe:   "live";
 }
 ```
@@ -184,7 +184,7 @@ curl http://localhost:3001/health/live
 ```json
 {
   "status": "ok",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "probe": "live"
 }
 ```
@@ -279,7 +279,7 @@ curl http://localhost:3001/health/ready
 ```json
 {
   "status": "ready",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "probe": "ready",
   "activeColor": "blue",
   "checks": [
@@ -295,7 +295,7 @@ curl http://localhost:3001/health/ready
 ```json
 {
   "status": "not-ready",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "probe": "ready",
   "activeColor": "blue",
   "checks": [
@@ -311,7 +311,7 @@ curl http://localhost:3001/health/ready
 ```json
 {
   "status": "not-ready",
-  "service": "talenttrust-backend",
+  "service": "covenant-backend",
   "probe": "ready",
   "reason": "drain-in-progress",
   "activeColor": "blue"
@@ -355,7 +355,7 @@ the shared `getDb()` singleton. No user input is involved.
 
 | Variable | Default | Description |
 |---|---|---|
-| `DB_PATH` | `talenttrust.db` | Path to the SQLite file |
+| `DB_PATH` | `covenant.db` | Path to the SQLite file |
 | `DB_BUSY_TIMEOUT` | `5000` | SQLite busy timeout in ms |
 
 ### `redis`
@@ -446,7 +446,7 @@ querying `circuitBreakerRegistry.getAll()`. No external I/O is performed.
 |---|---|---|
 | `NODE_ENV` | `development` | All — strips `detail` in `production` |
 | `REQUIRED_ENV_VARS` | `""` | `env` |
-| `DB_PATH` | `talenttrust.db` | `db` |
+| `DB_PATH` | `covenant.db` | `db` |
 | `DB_BUSY_TIMEOUT` | `5000` | `db` |
 | `REDIS_HOST` | `localhost` | `redis` |
 | `REDIS_PORT` | `6379` | `redis` |
@@ -455,7 +455,7 @@ querying `circuitBreakerRegistry.getAll()`. No external I/O is performed.
 | `QUEUE_PROBE_TIMEOUT_MS` | `3000` | `queue` |
 | `QUEUE_FAILED_THRESHOLD` | `10` | `queue` |
 | `QUEUE_BACKLOG_THRESHOLD` | `100` | `queue` |
-| `SERVICE_NAME` | `talenttrust-backend` | `GET /health/live`, `GET /health/ready` |
+| `SERVICE_NAME` | `covenant-backend` | `GET /health/live`, `GET /health/ready` |
 | `ACTIVE_COLOR` | `blue` | `GET /health/ready` |
 
 ---

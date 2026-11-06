@@ -1,6 +1,6 @@
 # Audit Data Retention & Purge Policy
 
-This document describes the data retention behavior of the Talenttrust audit subsystem.
+This document describes the data retention behavior of the Covenant audit subsystem.
 
 ## What is Stored
 

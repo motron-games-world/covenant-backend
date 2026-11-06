@@ -1,6 +1,6 @@
 # Webhooks Operations Runbook
 
-This runbook describes the configuration, failure modes, alerting signals, and recovery procedures for the TalentTrust webhooks subsystem. It is intended for operators who need to diagnose and resolve webhook delivery problems.
+This runbook describes the configuration, failure modes, alerting signals, and recovery procedures for the Covenant webhooks subsystem. It is intended for operators who need to diagnose and resolve webhook delivery problems.
 
 ---
 

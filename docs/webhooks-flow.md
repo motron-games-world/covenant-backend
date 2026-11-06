@@ -1,6 +1,6 @@
 # Webhooks Request Lifecycle
 
-This document provides an end-to-end view of the request lifecycle for webhook subscriptions in the Talenttrust-Backend. It covers the flow from the moment an HTTP request is received to its persistence in the database and the response sent back to the client.
+This document provides an end-to-end view of the request lifecycle for webhook subscriptions in the Covenant-Backend. It covers the flow from the moment an HTTP request is received to its persistence in the database and the response sent back to the client.
 
 ## Request Flow Diagram
 

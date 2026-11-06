@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: TalentTrust API
-  description: TalentTrust API Gateway and services documentation
+  title: Covenant API
+  description: Covenant API Gateway and services documentation
 servers:
   - url: /api/v1
 paths:
@@ -570,7 +570,7 @@ paths:
                     example: ok
                   service:
                     type: string
-                    example: talenttrust-backend
+                    example: covenant-backend
 
   /health/ready:
     servers:

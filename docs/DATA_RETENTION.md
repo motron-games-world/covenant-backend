@@ -1,6 +1,6 @@
 # Data Retention & Lifecycle Management
 
-This document details the data retention, archival, and purge processes within the Talenttrust-Backend repository. The retention engine ensures that our data lifecycle adheres to compliance standards, maintains tamper-evident audit trails, and executes operations safely.
+This document details the data retention, archival, and purge processes within the Covenant-Backend repository. The retention engine ensures that our data lifecycle adheres to compliance standards, maintains tamper-evident audit trails, and executes operations safely.
 
 ## 1. The Data Lifecycle Model
 

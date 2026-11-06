@@ -2,7 +2,7 @@ import request from 'supertest';
 import { createApp } from '../src/app';
 import { EscrowStore } from '../src/store';
 
-describe('TalentTrust API', () => {
+describe('Covenant API', () => {
   const app = createApp(new EscrowStore());
 
   describe('ETag and optimistic concurrency', () => {

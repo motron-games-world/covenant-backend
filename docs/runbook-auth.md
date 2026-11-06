@@ -1,6 +1,6 @@
 # Auth Subsystem Operations Runbook
 
-This document is the operator- and on-call-facing runbook for the TalentTrust
+This document is the operator- and on-call-facing runbook for the Covenant
 authentication and authorization subsystem. It covers configuration, common
 failure modes, alert symptom triage, and step-by-step recovery procedures.
 
@@ -389,7 +389,7 @@ curl -X POST http://localhost:3001/api/v1/api-keys \
 curl -H "X-API-Key: <new-key>" http://localhost:3001/api/v1/health
 
 # 3. If the issue is widespread, verify the database
-sqlite3 talenttrust.db "SELECT COUNT(*) AS total, SUM(CASE WHEN is_active THEN 1 ELSE 0 END) AS active FROM api_keys;"
+sqlite3 covenant.db "SELECT COUNT(*) AS total, SUM(CASE WHEN is_active THEN 1 ELSE 0 END) AS active FROM api_keys;"
 ```
 
 ### 4.4 Permission denied (403) for a role that should have access
@@ -458,7 +458,7 @@ refresh their session.
 **Recovery:**
 ```bash
 # Check user's refresh token state
-sqlite3 talenttrust.db "SELECT id, email, refresh_token_hash IS NOT NULL AS has_refresh FROM users WHERE email = '<user-email>';"
+sqlite3 covenant.db "SELECT id, email, refresh_token_hash IS NOT NULL AS has_refresh FROM users WHERE email = '<user-email>';"
 # NULL → token was consumed or never issued; non-NULL → token still valid
 
 # If widespread, check JWT_SECRET consistency
@@ -478,7 +478,7 @@ or startup probe.
 | Check | How to verify | Severity |
 |-------|--------------|----------|
 | `JWT_SECRET` is set | `echo $JWT_SECRET` — must be non-empty, ≥ 8 chars | **Critical** |
-| Database accessible | `sqlite3 talenttrust.db "SELECT 1"` | **Critical** |
+| Database accessible | `sqlite3 covenant.db "SELECT 1"` | **Critical** |
 | `JWT_VERIFY_OPTIONS` frozen | Covered by test suite: `npm test -- --testPathPattern=jwtConfig` | **High** |
 | No corrupt API key hashes | `SELECT COUNT(*) FROM api_keys WHERE key_hash NOT REGEXP '^[a-f0-9]{32}:[a-f0-9]{128}$'` | **High** |
 
@@ -500,7 +500,7 @@ or startup probe.
 rate(http_requests_total{status_code="401"}[5m])
 
 # Active API keys approaching expiry
-sqlite3 talenttrust.db "
+sqlite3 covenant.db "
   SELECT name, expires_at
   FROM api_keys
   WHERE is_active = 1
@@ -510,7 +510,7 @@ sqlite3 talenttrust.db "
 "
 
 # Users without refresh tokens (all logged out)
-sqlite3 talenttrust.db "
+sqlite3 covenant.db "
   SELECT COUNT(*) AS logged_out_users
   FROM users WHERE refresh_token_hash IS NULL;
 "
@@ -556,7 +556,7 @@ If `JWT_SECRET` is compromised:
 
 **Method 1 — clear all refresh tokens (force re-login for everyone):**
 ```bash
-sqlite3 talenttrust.db "UPDATE users SET refresh_token_hash = NULL;"
+sqlite3 covenant.db "UPDATE users SET refresh_token_hash = NULL;"
 ```
 All active sessions end at their access-token expiry (max 15 min).
 
@@ -564,7 +564,7 @@ All active sessions end at their access-token expiry (max 15 min).
 
 **Method 3 — revoke a single user:**
 ```bash
-sqlite3 talenttrust.db "UPDATE users SET refresh_token_hash = NULL WHERE email = '<user-email>';"
+sqlite3 covenant.db "UPDATE users SET refresh_token_hash = NULL WHERE email = '<user-email>';"
 ```
 
 ### 6.3 Deactivate a compromised API key
@@ -575,12 +575,12 @@ curl -X DELETE http://localhost:3001/api/v1/api-keys/<key-id> \
   -H "Authorization: Bearer <admin-token>"
 
 # Or directly in the database
-sqlite3 talenttrust.db "UPDATE api_keys SET is_active = 0 WHERE id = '<key-id>';"
+sqlite3 covenant.db "UPDATE api_keys SET is_active = 0 WHERE id = '<key-id>';"
 ```
 
 Then audit all keys created by the same user:
 ```bash
-sqlite3 talenttrust.db "SELECT id, name, scope, created_at, last_used_at FROM api_keys WHERE created_by = '<user-id>';"
+sqlite3 covenant.db "SELECT id, name, scope, created_at, last_used_at FROM api_keys WHERE created_by = '<user-id>';"
 ```
 
 ### 6.4 Fix a missing permission in the RBAC matrix
@@ -820,4 +820,4 @@ docs/
 
 **Last Updated:** 2026-07-25  
 **Version:** 1.0  
-**Maintainer:** TalentTrust Backend Team
+**Maintainer:** Covenant Backend Team

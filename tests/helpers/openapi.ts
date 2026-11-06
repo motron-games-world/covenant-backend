@@ -46,7 +46,7 @@ const spec = openapi as unknown as SpecDocument;
 
 // ── OpenAPI 3.0 → JSON Schema ─────────────────────────────────────────────────────────────────────
 
-const COMPONENTS_RESOURCE = 'https://talenttrust.local/openapi-components.json';
+const COMPONENTS_RESOURCE = 'https://covenant.local/openapi-components.json';
 const OAS_ONLY_KEYWORDS = new Set([
   'example',
   'examples',

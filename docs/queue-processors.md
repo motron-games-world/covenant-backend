@@ -1,6 +1,6 @@
 # Queue Processor Catalog
 
-Comprehensive reference for every background queue in the TalentTrust Backend
+Comprehensive reference for every background queue in the Covenant Backend
 system. Covers queue names, processor files, job payloads, concurrency, retry
 semantics, and an operator runbook for draining and replaying queues.
 

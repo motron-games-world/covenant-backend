@@ -1,10 +1,10 @@
 # Webhook Signature Verification
 
-This document outlines the security assumptions, design principles, and implementation details for the webhook signature verification system in the TalentTrust backend.
+This document outlines the security assumptions, design principles, and implementation details for the webhook signature verification system in the Covenant backend.
 
 ## Overview
 
-All outbound webhooks from the Talenttrust Backend are signed using HMAC-SHA256 when a webhook secret is configured. This ensures the authenticity and integrity of webhook payloads.
+All outbound webhooks from the Covenant Backend are signed using HMAC-SHA256 when a webhook secret is configured. This ensures the authenticity and integrity of webhook payloads.
 
 ## Headers
 
@@ -300,7 +300,7 @@ If the limit is exceeded the delivery is **immediately moved to the DLQ** with e
 
 ## Webhook Delivery Retry Policy
 
-The Talenttrust Backend implements exponential backoff with jitter for webhook delivery to handle transient failures gracefully. Failed deliveries are automatically retried before being enqueued to the Dead Letter Queue (DLQ).
+The Covenant Backend implements exponential backoff with jitter for webhook delivery to handle transient failures gracefully. Failed deliveries are automatically retried before being enqueued to the Dead Letter Queue (DLQ).
 
 ### Transient vs. Non-Transient Failures
 
@@ -449,7 +449,7 @@ console.log('Signature valid:', isValid); // Should be true
    - Consider adjusting the maximum age threshold
 
 3. **"Missing signature headers"**
-   - Ensure webhook secret is configured in Talenttrust Backend
+   - Ensure webhook secret is configured in Covenant Backend
    - Check that headers are being forwarded correctly by proxies/load balancers
 
 ### Debugging Steps

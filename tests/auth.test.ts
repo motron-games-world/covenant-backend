@@ -44,7 +44,7 @@ describe('wallet-signature auth', () => {
       const res = await request(app).get(`/api/v1/auth/challenge?address=${kp.publicKey()}`);
       expect(res.status).toBe(200);
       expect(res.body.address).toBe(kp.publicKey());
-      expect(res.body.challenge).toMatch(/^talenttrust-auth:/);
+      expect(res.body.challenge).toMatch(/^covenant-auth:/);
       expect(res.body.expiresAt).toBeDefined();
     });
 
@@ -612,12 +612,12 @@ describe('wallet-signature auth', () => {
     it('buildChallenge produces a verifiable challenge', () => {
       const addr = Keypair.random().publicKey();
       const { challenge, expiresAt } = buildChallenge(addr, AUTH_SECRET);
-      expect(challenge).toMatch(/^talenttrust-auth:/);
+      expect(challenge).toMatch(/^covenant-auth:/);
       const result = verifyChallenge(challenge, addr, AUTH_SECRET);
       expect(result.ok).toBe(true);
       if (result.ok) {
         expect(result.payload.address).toBe(addr);
-        expect(result.payload.aud).toBe('talenttrust-api');
+        expect(result.payload.aud).toBe('covenant-api');
       }
       expect(new Date(expiresAt).getTime()).toBeGreaterThan(Date.now());
     });

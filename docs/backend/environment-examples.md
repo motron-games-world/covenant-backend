@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides example configurations for each environment in the TalentTrust Backend deployment pipeline.
+This document provides example configurations for each environment in the Covenant Backend deployment pipeline.
 
 ## Development Environment
 
@@ -47,11 +47,11 @@ npm run build
 # .env.staging
 NODE_ENV=staging
 PORT=3002
-API_BASE_URL=https://staging-api.talenttrust.example.com
+API_BASE_URL=https://staging-api.covenant.example.com
 DEBUG=false
-CORS_ALLOWED_ORIGINS=https://staging.talenttrust.example.com
+CORS_ALLOWED_ORIGINS=https://staging.covenant.example.com
 MAX_REQUEST_SIZE=10mb
-DATABASE_URL=postgresql://user:pass@staging-db.example.com:5432/talenttrust
+DATABASE_URL=postgresql://user:pass@staging-db.example.com:5432/covenant
 ```
 
 ### Characteristics
@@ -67,7 +67,7 @@ DATABASE_URL=postgresql://user:pass@staging-db.example.com:5432/talenttrust
 
 ```yaml
 # Configure in GitHub: Settings → Secrets → Actions
-DATABASE_URL: postgresql://user:pass@staging-db.example.com:5432/talenttrust
+DATABASE_URL: postgresql://user:pass@staging-db.example.com:5432/covenant
 STELLAR_SECRET_KEY: S[STAGING_SECRET_KEY]
 API_KEY: [STAGING_API_KEY]
 ```
@@ -91,11 +91,11 @@ git push origin staging
 # .env.production
 NODE_ENV=production
 PORT=3000
-API_BASE_URL=https://api.talenttrust.example.com
+API_BASE_URL=https://api.covenant.example.com
 DEBUG=false
-CORS_ALLOWED_ORIGINS=https://app.talenttrust.example.com,https://www.talenttrust.example.com
+CORS_ALLOWED_ORIGINS=https://app.covenant.example.com,https://www.covenant.example.com
 MAX_REQUEST_SIZE=10mb
-DATABASE_URL=postgresql://user:pass@prod-db.example.com:5432/talenttrust
+DATABASE_URL=postgresql://user:pass@prod-db.example.com:5432/covenant
 ```
 
 ### Characteristics
@@ -112,7 +112,7 @@ DATABASE_URL=postgresql://user:pass@prod-db.example.com:5432/talenttrust
 
 ```yaml
 # Configure in GitHub: Settings → Secrets → Actions
-DATABASE_URL: postgresql://user:pass@prod-db.example.com:5432/talenttrust
+DATABASE_URL: postgresql://user:pass@prod-db.example.com:5432/covenant
 STELLAR_SECRET_KEY: S[PRODUCTION_SECRET_KEY]
 API_KEY: [PRODUCTION_API_KEY]
 ENCRYPTION_KEY: [PRODUCTION_ENCRYPTION_KEY]

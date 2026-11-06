@@ -1,6 +1,6 @@
 # API Keys Subsystem Operations Runbook
 
-This document is the operator- and on-call-facing runbook for the TalentTrust
+This document is the operator- and on-call-facing runbook for the Covenant
 **API key** subsystem — creation, hashing, validation, rotation, revocation,
 and the management HTTP surface. It covers configuration, common failure
 modes, alert symptom triage, and step-by-step recovery procedures.
@@ -329,7 +329,7 @@ curl -H "X-API-Key: <key>" http://localhost:3001/api/v1/contracts
 # 1. Confirm key state directly (adjust for your DB backend / storage file)
 #    is_active, expires_at, last_used_at tell you rotated/deactivated/expired
 #    at a glance.
-sqlite3 talenttrust.db \
+sqlite3 covenant.db \
   "SELECT id, name, is_active, expires_at, last_used_at FROM api_keys WHERE id = '<key-id>';"
 
 # 2. If rotated or deactivated intentionally, issue a new key
@@ -396,7 +396,7 @@ console shows `API key validation error: <Error>`.
 **Recovery:**
 ```bash
 # 1. Check storage health directly
-sqlite3 talenttrust.db "SELECT 1;"   # or your configured backend
+sqlite3 covenant.db "SELECT 1;"   # or your configured backend
 
 # 2. Check for lock contention / disk issues in DB logs
 
@@ -487,7 +487,7 @@ curl -X DELETE http://localhost:3001/api/v1/api-keys/<id> \
 
 | Check | How to verify | Severity |
 |-------|----------------|----------|
-| Storage accessible | `sqlite3 talenttrust.db "SELECT 1"` (or configured backend) | **Critical** |
+| Storage accessible | `sqlite3 covenant.db "SELECT 1"` (or configured backend) | **Critical** |
 | No corrupt `key_hash` rows | `SELECT COUNT(*) FROM api_keys WHERE key_hash NOT REGEXP '^[a-f0-9]{32}:[a-f0-9]{128}$'` | **High** |
 | `apiKeysRouter` mounted | `grep "apiKeysRouter" src/app.ts` — confirm the `app.use('/api/v1', apiKeysRouter)` line is present (§1.3) | **High** |
 | Test suite green | `npm test -- --testPathPattern=apiKey` | **Medium** |
@@ -544,7 +544,7 @@ curl -X DELETE http://localhost:3001/api/v1/api-keys/<key-id> \
   -H "Authorization: Bearer <owner-token>"
 
 # Or directly against storage if the owner is unavailable/compromised
-sqlite3 talenttrust.db "UPDATE api_keys SET is_active = 0 WHERE id = '<key-id>';"
+sqlite3 covenant.db "UPDATE api_keys SET is_active = 0 WHERE id = '<key-id>';"
 ```
 Then audit all other keys created by the same user, since a compromised
 credential often means the same actor's other keys are suspect too:
@@ -720,4 +720,4 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 
 **Last Updated:** 2026-07-25
 **Version:** 1.0
-**Maintainer:** TalentTrust Backend Team
+**Maintainer:** Covenant Backend Team

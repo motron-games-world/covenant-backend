@@ -42,7 +42,7 @@
 
 // ### Where the SQLite file lives
 // - In production the file is located at the path defined by the `DB_PATH`
-//   environment variable, defaulting to `talenttrust.db` in the project root.
+//   environment variable, defaulting to `covenant.db` in the project root.
 // - During unit tests the database is opened with the special path `":memory:"`
 //   which creates an isolated, in‑memory SQLite instance that is discarded after
 //   each test suite (`closeDb` is called).

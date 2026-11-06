@@ -1,10 +1,10 @@
 # API Key Authentication
 
-This document describes the API key authentication system implemented for TalentTrust Backend.
+This document describes the API key authentication system implemented for Covenant Backend.
 
 ## Overview
 
-API keys provide a secure way for internal services and external integrations to access the TalentTrust API without requiring user authentication. API keys are separate from JWT user authentication and can be used for service-to-service communication.
+API keys provide a secure way for internal services and external integrations to access the Covenant API without requiring user authentication. API keys are separate from JWT user authentication and can be used for service-to-service communication.
 
 > **Route mounting note:** The management endpoints described below
 > (`POST/GET /api/v1/api-keys`, `GET/POST/DELETE /api/v1/api-keys/:id`, `.../rotate`)

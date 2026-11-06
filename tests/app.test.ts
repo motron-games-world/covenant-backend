@@ -16,7 +16,7 @@ function seededStore(n: number): EscrowStore {
   return s;
 }
 
-describe('TalentTrust API', () => {
+describe('Covenant API', () => {
   const app = createApp(new EscrowStore());
 
   it('serves health and root', async () => {

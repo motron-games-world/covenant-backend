@@ -3,7 +3,7 @@
 ## Overview
 
 The Notification Service Hooks module provides a centralized way to broadcast
-multi-channel alerts across the TalentTrust decentralized freelancer escrow
+multi-channel alerts across the Covenant decentralized freelancer escrow
 protocol. When key events happen in the escrow lifecycle (e.g., Funds
 Deposited, Dispute Raised), hooks are triggered to execute concurrent external
 delivery mechanics.

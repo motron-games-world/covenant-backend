@@ -2,7 +2,7 @@
 
 ## Overview
 
-The TalentTrust audit log provides **immutable, tamper-evident recording** of all sensitive state changes in the platform. Every contract lifecycle event, payment, user management action, and authentication event is persisted as a frozen, hash-chained entry.
+The Covenant audit log provides **immutable, tamper-evident recording** of all sensitive state changes in the platform. Every contract lifecycle event, payment, user management action, and authentication event is persisted as a frozen, hash-chained entry.
 
 ---
 

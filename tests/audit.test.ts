@@ -3,7 +3,7 @@ import { createApp } from '../src/app';
 import { EscrowStore } from '../src/store';
 import { AuditStore } from '../src/audit';
 
-describe('TalentTrust API', () => {
+describe('Covenant API', () => {
   const app = createApp(new EscrowStore());
 
   describe('Audit log', () => {

@@ -1,6 +1,6 @@
 # Circuit Breaker for RPC Failures
 
-> Reference documentation for the TalentTrust circuit-breaker module.
+> Reference documentation for the Covenant circuit-breaker module.
 
 ## Overview
 

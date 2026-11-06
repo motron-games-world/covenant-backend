@@ -2,7 +2,7 @@
 
 All notable changes to the Reputation API (`/api/v1/reputation/:id`) are documented here.
 
-This file is scoped to `Talenttrust/Talenttrust-Backend` only. Any PR that changes
+This file is scoped to `Covenant/Covenant-Backend` only. Any PR that changes
 reputation request/response shape, scoring logic, validation rules, or auth
 requirements for these endpoints **must** add an entry here in the same PR.
 

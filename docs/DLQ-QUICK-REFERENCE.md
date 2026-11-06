@@ -73,7 +73,7 @@ for (const entry of entries ?? []) {
 
 ```yaml
 scrape_configs:
-  - job_name: 'talenttrust-webhooks'
+  - job_name: 'covenant-webhooks'
     static_configs:
       - targets: ['localhost:3001']
     scrape_interval: 15s
