@@ -1,17 +1,47 @@
 # Covenant Backend
 
-## Live
+[![CI](https://github.com/motron-games-world/covenant-backend/actions/workflows/ci.yml/badge.svg)](https://github.com/motron-games-world/covenant-backend/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-- Website/API/Docs: pending under new branding
-- Contract (Stellar testnet): [`CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W`](https://stellar.expert/explorer/testnet/contract/CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W)
-
-Express + TypeScript API for Covenant, a milestone-based freelancer escrow protocol on Stellar.
-The API mirrors the state machine of the Soroban escrow contract
-([Talenttrust-Contracts](https://github.com/Talenttrust/Talenttrust-Contracts)) so clients and
+Express + TypeScript API for **Covenant**, a milestone-based escrow protocol for freelance
+work on Stellar. The API mirrors the state machine of the Soroban escrow contract
+([covenant-contracts](https://github.com/motron-games-world/covenant-contracts)) so clients and
 freelancers can create engagements, fund escrow, release milestones, raise disputes and build reputation.
 
 Storage is in-memory (seeded with demo data), so no database is required. On serverless hosting the
 data is per-instance and resets on redeploy.
+
+Covenant is split across three repositories:
+
+| Repo | Role |
+| --- | --- |
+| [covenant-contracts](https://github.com/motron-games-world/covenant-contracts) | Soroban smart contract — the source of truth for escrow state |
+| **covenant-backend** (this repo) | REST API mirroring the contract's state machine |
+| [covenant-frontend](https://github.com/motron-games-world/covenant-frontend) | Web app for clients and freelancers |
+
+## Contents
+
+- [Live](#live)
+- [Endpoints](#endpoints)
+- [Webhooks](#webhooks)
+- [Milestone templates](#milestone-templates)
+- [Audit log](#audit-log)
+- [Admin dispute queue](#admin-dispute-queue)
+- [Reviews](#reviews)
+- [Sparse fieldsets](#sparse-fieldsets)
+- [Idempotency](#idempotency)
+- [Authentication](#authentication)
+- [Security](#security)
+- [Scoped API keys](#scoped-api-keys)
+- [Health probes](#health-probes)
+- [Development](#development)
+- [Deployment](#deployment)
+- [License](#license)
+
+## Live
+
+- Website/API/Docs: pending under new branding
+- Contract (Stellar testnet): [`CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W`](https://stellar.expert/explorer/testnet/contract/CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W)
 
 ## Endpoints
 
@@ -331,4 +361,4 @@ vercel deploy --prod
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
