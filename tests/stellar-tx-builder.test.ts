@@ -17,7 +17,7 @@ const passphrase = Networks.TESTNET;
 function authEntry(address: string) {
   const contractCall = xdr.SorobanAuthorizedFunction.sorobanAuthorizedFunctionTypeContractFn(
     new xdr.InvokeContractArgs({
-      contractAddress: Address.fromString('CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W').toScAddress(),
+      contractAddress: Address.fromString('CCEEQECMQXMWPZYIT4QOKB2LM72IGXR3B4NE4H2NRRI4U3GRMO2I7KHA').toScAddress(),
       functionName: 'cancel_contract',
       args: [],
     }),
@@ -79,7 +79,7 @@ describe('Soroban transaction builder', () => {
   ])('encodes %s with correctly typed arguments', async (action, args, functionName, types) => {
     const { result, transaction } = await build(action, args);
     const call = contractCall(transaction);
-    expect(call.contractAddress).toBe(new Contract('CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W').contractId());
+    expect(call.contractAddress).toBe(new Contract('CCEEQECMQXMWPZYIT4QOKB2LM72IGXR3B4NE4H2NRRI4U3GRMO2I7KHA').contractId());
     expect(call.contractFn).toBe(functionName);
     expect(call.args.map((arg) => arg.switch().name)).toEqual(types);
     expect(transaction.signatures).toHaveLength(0);

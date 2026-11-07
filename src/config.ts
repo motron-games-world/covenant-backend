@@ -42,7 +42,7 @@ export const config = {
     NETWORK_PASSPHRASES[network.toLowerCase()] ||
     NETWORK_PASSPHRASES.testnet,
   contractId:
-    process.env.ESCROW_CONTRACT_ID || 'CCZMIVUBMG5SBC47SDTC32RWLBJ2HW2DCFVWJEOKCH2IFJBZGBKTXK5W',
+    process.env.ESCROW_CONTRACT_ID || 'CCEEQECMQXMWPZYIT4QOKB2LM72IGXR3B4NE4H2NRRI4U3GRMO2I7KHA',
   rpcUrl: process.env.STELLAR_RPC_URL || 'https://soroban-testnet.stellar.org',
   txTimeoutSeconds: Math.max(1, Number.parseInt(process.env.TX_TIMEOUT_SECONDS || '300', 10) || 300),
   // No default while the Covenant frontend's new deployment is pending; set FRONTEND_URL explicitly.
